@@ -330,6 +330,13 @@
             border-radius: 5px;
             letter-spacing: 2px;
             border: 1px dashed var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .code-value:hover {
+            background-color: var(--info);
+            color: white;
         }
 
         .code-info {
@@ -1195,7 +1202,6 @@
                         <option value="Edição Limitada">Edição Limitada</option>
                     </select>
                 </div>
-                <!-- Alteração aqui: de dias para minutos -->
                 <div class="admin-form-group">
                     <label for="auction-duration">Duração (minutos):</label>
                     <input type="number" id="auction-duration" min="1" value="60" required>
@@ -1345,7 +1351,7 @@
                         <li>Verifique seu e-mail (se você recebeu um token por e-mail)</li>
                         <li>Procure na pasta de downloads (se você salvou em um arquivo)</li>
                         <li>Verifique no dispositivo onde você participou anteriormente</li>
-                        <li>Caso tenha perdido, entre em contato com o suporte</li>
+                        <li>Caso tenha perdido, entre em contato conosco</li>
                     </ul>
                 </div>
             </div>
@@ -1593,6 +1599,23 @@
                     window.auctionTimers.forEach(timer => clearInterval(timer));
                 }
             });
+            
+            // Delegar eventos para elementos dinâmicos
+            document.addEventListener('click', function(e) {
+                // Copiar código de compra
+                if (e.target.classList.contains('code-value')) {
+                    copyCodeToClipboard(e.target.textContent);
+                }
+                
+                // Botão de finalizar compra
+                if (e.target.id && e.target.id.startsWith('purchase-btn-')) {
+                    const auctionId = e.target.dataset.id;
+                    const auction = auctions.find(a => a.id === auctionId);
+                    if (auction) {
+                        showPurchaseDetails(auction);
+                    }
+                }
+            });
         });
 
         // Criar novo token
@@ -1688,6 +1711,18 @@
                 })
                 .catch(err => {
                     showToast('Erro ao copiar token', 'error');
+                    console.error('Erro ao copiar: ', err);
+                });
+        }
+        
+        // Copiar código de compra
+        function copyCodeToClipboard(code) {
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    showToast('Código copiado para a área de transferência!', 'success');
+                })
+                .catch(err => {
+                    showToast('Erro ao copiar código', 'error');
                     console.error('Erro ao copiar: ', err);
                 });
         }
@@ -1838,7 +1873,6 @@
                 const isHighestBidder = auction.highestBidder && auction.highestBidder.id === userToken;
                 const isWinner = auction.winnerId && auction.winnerId === userToken;
                 const canGenerateCode = ended && isHighestBidder && !auction.code;
-                const codeGenerated = ended && auction.code;
                 const showCode = showWinnerCode(auction);
                 
                 const categoryClass = auction.category ? 
@@ -1910,7 +1944,7 @@
                                         <span class="code-value">${auction.code}</span>
                                     </div>
                                     <p class="code-info">
-                                        Este código garante seu direito de compra. Guarde-o com segurança!
+                                        Clique no código para copiar ou use o botão abaixo para finalizar a compra.
                                     </p>
                                     <button class="btn-code" data-id="${auction.id}" id="purchase-btn-${auction.id}">
                                         <i class="fas fa-shopping-cart"></i> Finalizar Compra
@@ -1947,11 +1981,6 @@
                 if (canGenerateCode) {
                     const btn = card.querySelector('.btn-code');
                     btn && btn.addEventListener('click', () => generateCode(auction.id));
-                }
-                
-                if (showCode) {
-                    const purchaseBtn = card.querySelector(`#purchase-btn-${auction.id}`);
-                    purchaseBtn && purchaseBtn.addEventListener('click', () => showPurchaseDetails(auction));
                 }
                 
                 // Mostrar seções se necessário
@@ -2043,7 +2072,7 @@
             });
         }
 
-        // Formatar tempo restante (agora em minutos e segundos)
+        // Formatar tempo restante
         function formatTime(ms) {
             if (ms <= 0) return '00:00:00';
             
@@ -2124,7 +2153,7 @@
             });
         }
 
-        // Gerar código de compra (corrigido)
+        // Gerar código de compra (corrigido para atualização imediata)
         function generateCode(auctionId) {
             const auction = auctions.find(a => a.id === auctionId);
             if (!auction) return;
@@ -2150,15 +2179,24 @@
             
             const code = 'MINI-' + auctionId + '-' + Math.random().toString(36).substr(2, 8).toUpperCase();
             
-            // Atualizar no Firestore - incluindo highestBidder para satisfazer regras
+            // Atualizar no Firestore
             db.collection("auctions").doc(auctionId).update({
                 code: code,
                 winnerId: userToken.toUpperCase(),
-                highestBidder: auction.highestBidder // Mantemos o highestBidder
+                highestBidder: auction.highestBidder
             })
             .then(() => {
                 showToast('Código gerado com sucesso!', 'success');
-                loadAuctions(); // Recarrega os leilões para atualizar a interface
+                
+                // Atualiza o leilão localmente
+                const auctionIndex = auctions.findIndex(a => a.id === auctionId);
+                if (auctionIndex !== -1) {
+                    auctions[auctionIndex].code = code;
+                    auctions[auctionIndex].winnerId = userToken.toUpperCase();
+                    
+                    // Força a atualização do card
+                    renderAuctions();
+                }
             })
             .catch(error => {
                 console.error("Erro ao gerar código: ", error);
@@ -2525,14 +2563,14 @@
                 <div class="auction-purchase-info">
                     <h3>${auction.title}</h3>
                     <div class="purchase-summary">
-                        <p><strong>Código de compra:</strong> ${auction.code}</p>
+                        <p><strong>Código de compra:</strong> <span class="code-value">${auction.code}</span></p>
                         <p><strong>Valor final:</strong> R$ ${auction.currentBid.toFixed(2)}</p>
                         <p><strong>Status:</strong> Aguardando pagamento</p>
                     </div>
                     <div class="instructions">
                         <h4>Como finalizar sua compra:</h4>
                         <ol>
-                            <li>Anote seu código de compra: <strong>${auction.code}</strong></li>
+                            <li>Copie seu código de compra: <strong>${auction.code}</strong></li>
                             <li>Entre em contato conosco via WhatsApp ou e-mail</li>
                             <li>Informe o código de compra e o item adquirido</li>
                             <li>Combine a forma de pagamento e entrega</li>
@@ -2550,6 +2588,14 @@
             btnWhatsapp.href = `https://wa.me/SEUNUMERO?text=${message}`;
             
             purchaseModal.style.display = 'flex';
+            
+            // Adicionar evento para copiar código no modal
+            const modalCode = document.querySelector('.purchase-summary .code-value');
+            if (modalCode) {
+                modalCode.addEventListener('click', () => {
+                    copyCodeToClipboard(auction.code);
+                });
+            }
         }
     </script>
 </body>
