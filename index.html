@@ -6,7 +6,7 @@
     <title>Leilão de Miniaturas Colecionáveis</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Estilos anteriores permanecem aqui */
+        /* Estilos permanecem os mesmos */
         :root {
             --primary: #3572A5;
             --secondary: #6c757d;
@@ -1451,7 +1451,7 @@
         const auctionsPerPage = 6;
         let totalAuctions = 0;
 
-        // CORREÇÃO: Garantir token em maiúsculas
+        // Garantir token em maiúsculas
         if (userToken) {
             userToken = userToken.toUpperCase();
             localStorage.setItem('userToken', userToken);
@@ -1459,7 +1459,7 @@
 
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
-            // Verificar se o token salvo é válido
+            // Verificar token válido
             if (userToken && (!userToken.startsWith('TOK-') || userToken.length !== 12)) {
                 showToast('Token inválido detectado. Por favor, gere um novo', 'error');
                 localStorage.removeItem('userToken');
@@ -1468,9 +1468,8 @@
                 userName = null;
             }
             
-            // Verificar se o usuário já tem um token
+            // Configurar token se necessário
             if (!userToken) {
-                // Se não tem token, mostrar modal de configuração
                 setTimeout(() => {
                     tokenSetupModal.style.display = 'flex';
                 }, 1000);
@@ -1481,7 +1480,6 @@
             // Inicializar Firebase Auth
             auth.onAuthStateChanged(user => {
                 if (user) {
-                    console.log("Usuário autenticado:", user.email);
                     userInfo.style.display = 'flex';
                     userEmail.textContent = user.email;
                     
@@ -1493,7 +1491,6 @@
                         if (userToken) loadAuctions();
                     });
                 } else {
-                    console.log("Nenhum usuário autenticado");
                     userInfo.style.display = 'none';
                     adminInfo.style.display = 'none';
                     if (userToken) loadAuctions();
@@ -1569,7 +1566,7 @@
                     filterButtons.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     currentFilter = btn.dataset.filter;
-                    currentPage = 1; // Resetar para a primeira página
+                    currentPage = 1;
                     renderAuctions();
                 });
             });
@@ -1598,7 +1595,7 @@
             });
         });
 
-        // Criar novo token com formato corrigido e seguro
+        // Criar novo token
         function createNewToken() {
             const name = userNameInput.value.trim();
             
@@ -1607,7 +1604,7 @@
                 return;
             }
             
-            // Garante exatamente 8 caracteres alfanuméricos
+            // Gerar token
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
             let randomPart = '';
             for (let i = 0; i < 8; i++) {
@@ -1638,9 +1635,9 @@
             });
         }
 
-        // CORREÇÃO: Usar token existente com conversão para maiúsculas
+        // Usar token existente
         function useExistingToken() {
-            let token = existingTokenInput.value.trim().toUpperCase(); // Converter para maiúsculas
+            let token = existingTokenInput.value.trim().toUpperCase();
             
             // Validar formato
             if (!token.startsWith('TOK-') || token.length !== 12 || !/^[A-Z0-9-]+$/.test(token)) {
@@ -1648,7 +1645,7 @@
                 return;
             }
             
-            // Verificar se o token existe no Firestore
+            // Verificar se o token existe
             db.collection("users").doc(token).get()
             .then(doc => {
                 if (doc.exists) {
@@ -1673,7 +1670,7 @@
             });
         }
 
-        // Mostrar modal com token do usuário
+        // Mostrar modal com token
         function showTokenModal() {
             if (userToken) {
                 tokenDisplay.textContent = userToken;
@@ -1683,7 +1680,7 @@
             }
         }
 
-        // Copiar token para área de transferência
+        // Copiar token
         function copyTokenToClipboard() {
             navigator.clipboard.writeText(userToken)
                 .then(() => {
@@ -1695,7 +1692,7 @@
                 });
         }
 
-        // Verificar status de admin com Promises
+        // Verificar status de admin
         function checkAdminStatus(userId) {
             return new Promise((resolve, reject) => {
                 db.collection("admins").doc(userId).get()
@@ -1718,7 +1715,7 @@
             });
         }
 
-        // Tornar-se administrador
+        // Tornar administrador
         function makeAdmin() {
             const user = auth.currentUser;
             if (!user) {
@@ -1740,7 +1737,7 @@
                 });
         }
 
-        // Carregar leilões do Firestore com tratamento de erro melhorado
+        // Carregar leilões
         function loadAuctions() {
             firebaseStatus.style.display = 'block';
             firebaseStatus.textContent = 'Conectando ao Firebase...';
@@ -1774,7 +1771,6 @@
                 error => {
                     console.error("Erro ao carregar leilões: ", error);
                     
-                    // Mensagem de erro específica
                     const errorMsg = error.code === 'permission-denied' ? 
                         "Permissão negada. Configure as regras do Firebase" : 
                         "Aguarde carregamento automático ou clique em atualizar.";
@@ -1809,7 +1805,7 @@
             
             auctionsContainer.innerHTML = '';
             
-            // Ordenar leilões: ativos primeiro, depois finalizados
+            // Ordenar leilões
             const sortedAuctions = [...auctions].sort((a, b) => {
                 const aEnded = isAuctionEnded(a);
                 const bEnded = isAuctionEnded(b);
@@ -1843,7 +1839,7 @@
                 const isWinner = auction.winnerId && auction.winnerId === userToken;
                 const canGenerateCode = ended && isHighestBidder && !auction.code;
                 const codeGenerated = ended && auction.code;
-                const showCode = showWinnerCode(auction); // Verifica se deve mostrar o código
+                const showCode = showWinnerCode(auction);
                 
                 const categoryClass = auction.category ? 
                     `category-${auction.category.toLowerCase().replace(/ /g, '-')}` : 
@@ -1998,13 +1994,17 @@
         function showWinnerCode(auction) {
             if (!userToken) return false;
             
+            // Verifica se o leilão terminou
+            const endTime = auction.startTime.toMillis() + auction.duration;
+            const ended = endTime <= Date.now();
+            
             // Verifica se o usuário atual é o vencedor
             const isWinner = auction.winnerId && auction.winnerId === userToken;
             
             // Verifica se o código está disponível
             const codeAvailable = auction.code && auction.code.length > 0;
             
-            return isWinner && codeAvailable;
+            return ended && isWinner && codeAvailable;
         }
 
         // Verificar se o leilão terminou
@@ -2064,7 +2064,7 @@
             return date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         }
 
-        // CORREÇÃO: Manipular lance com token em maiúsculas
+        // Manipular lance
         function handleBid(e, auctionId) {
             e.preventDefault();
             const form = e.target;
@@ -2082,25 +2082,21 @@
                 return;
             }
             
-            // Verificação de lance mínimo corrigida
             if (bidValue <= auction.currentBid) {
                 showToast(`Lance deve ser maior que R$ ${auction.currentBid.toFixed(2)}`, 'error');
                 return;
             }
             
-            // Se o usuário não tem token, pedir para configurar
             if (!userToken) {
                 tokenSetupModal.style.display = 'flex';
                 showToast('Você precisa configurar um token para dar lances', 'error');
                 return;
             }
             
-            // Atualizar no Firestore com estrutura compatível
             const auctionRef = db.collection("auctions").doc(auctionId);
             
-            // CORREÇÃO: Usar token em maiúsculas
             const newBid = {
-                id: userToken.toUpperCase(), // Garantir maiúsculas
+                id: userToken.toUpperCase(),
                 name: userName,
                 amount: bidValue,
                 timestamp: Date.now()
@@ -2109,7 +2105,7 @@
             auctionRef.update({
                 currentBid: bidValue,
                 highestBidder: {
-                    id: userToken.toUpperCase(), // Garantir maiúsculas
+                    id: userToken.toUpperCase(),
                     name: userName
                 },
                 bidHistory: firebase.firestore.FieldValue.arrayUnion(newBid)
@@ -2132,7 +2128,7 @@
             });
         }
 
-        // CORREÇÃO: Gerar código com token em maiúsculas
+        // Gerar código de compra (corrigido)
         function generateCode(auctionId) {
             const auction = auctions.find(a => a.id === auctionId);
             if (!auction) return;
@@ -2158,14 +2154,15 @@
             
             const code = 'MINI-' + auctionId + '-' + Math.random().toString(36).substr(2, 8).toUpperCase();
             
-            // Atualizar no Firestore
-            // CORREÇÃO: Usar token em maiúsculas
+            // Atualizar no Firestore - incluindo highestBidder para satisfazer regras
             db.collection("auctions").doc(auctionId).update({
                 code: code,
-                winnerId: userToken.toUpperCase() // Garantir maiúsculas
+                winnerId: userToken.toUpperCase(),
+                highestBidder: auction.highestBidder // Mantemos o highestBidder
             })
             .then(() => {
                 showToast('Código gerado com sucesso!', 'success');
+                loadAuctions(); // Recarrega os leilões para atualizar a interface
             })
             .catch(error => {
                 console.error("Erro ao gerar código: ", error);
@@ -2213,7 +2210,6 @@
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             
-            // Adicionar ícone e possível link para detalhes
             toast.innerHTML = `
                 <i class="fas ${type === 'success' ? 'fa-check' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
                 <span class="toast-message">${message}</span>
@@ -2222,7 +2218,6 @@
             
             document.body.appendChild(toast);
             
-            // Adicionar evento para mostrar detalhes no console
             if (type === 'error') {
                 toast.querySelector('.toast-details').addEventListener('click', (e) => {
                     e.preventDefault();
@@ -2248,7 +2243,6 @@
                 return;
             }
             
-            // Verificar se é admin com callback
             checkAdminStatus(user.uid).then(isAdminUser => {
                 if (isAdminUser) {
                     adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' : 'block';
@@ -2288,7 +2282,6 @@
                 document.getElementById('auction-description').value = auction.description || '';
                 document.getElementById('auction-category').value = auction.category || '';
                 
-                // Converter milissegundos para dias
                 const days = Math.floor(auction.duration / (1000 * 60 * 60 * 24));
                 document.getElementById('auction-duration').value = days || 7;
                 
@@ -2297,7 +2290,7 @@
             }
         }
         
-        // Salvar leilão (admin) com validações
+        // Salvar leilão (admin)
         function saveAuction() {
             if (!isAdmin) {
                 showToast('Acesso não autorizado', 'error');
@@ -2312,7 +2305,6 @@
             const startBid = parseFloat(document.getElementById('auction-start-bid').value);
             const image = document.getElementById('auction-image').value;
             
-            // Validações adicionadas
             if (durationDays < 1) {
                 showToast('A duração deve ser de pelo menos 1 dia', 'error');
                 return;
@@ -2323,14 +2315,13 @@
                 return;
             }
             
-            // Converter dias para milissegundos
             const durationMs = durationDays * 24 * 60 * 60 * 1000;
             
             const auctionData = {
                 title,
                 description,
                 category,
-                duration: durationMs, // Usar milissegundos
+                duration: durationMs,
                 currentBid: startBid,
                 highestBidder: null,
                 ended: false,
@@ -2342,7 +2333,6 @@
             };
             
             if (id === 'new') {
-                // Novo leilão
                 db.collection("auctions").add(auctionData)
                 .then(() => {
                     showToast('Leilão criado com sucesso!', 'success');
@@ -2353,7 +2343,6 @@
                     showToast('Erro ao criar leilão', 'error');
                 });
             } else {
-                // Editar leilão existente
                 db.collection("auctions").doc(id).update({
                     title,
                     description,
@@ -2388,7 +2377,6 @@
             const email = adminEmailInput.value;
             const password = adminPasswordInput.value;
             
-            // Validação básica
             if (!email || !password) {
                 loginError.textContent = "Por favor, preencha todos os campos";
                 loginError.style.display = 'block';
@@ -2399,14 +2387,12 @@
                 .then((userCredential) => {
                     const user = userCredential.user;
                     
-                    // Registrar o usuário na coleção de usuários
                     db.collection("users").doc(user.uid).set({
                         email: user.email,
                         name: "Administrador",
                         createdAt: firebase.firestore.FieldValue.serverTimestamp()
                     }, { merge: true });
                     
-                    // Verificar se é admin com callback
                     checkAdminStatus(user.uid).then(isAdminUser => {
                         loginModal.style.display = 'none';
                         adminEmailInput.value = '';
@@ -2454,7 +2440,6 @@
                     loginError.textContent = errorMessage;
                     loginError.style.display = 'block';
                     
-                    // Sugerir criação de conta se não existir
                     if (error.code === "auth/user-not-found") {
                         loginError.innerHTML += `<br><br>Deseja <a href="#" id="create-account">criar uma conta</a>?`;
                         document.getElementById('create-account').addEventListener('click', createAdminAccount);
@@ -2476,7 +2461,6 @@
                 .then((userCredential) => {
                     const user = userCredential.user;
                     
-                    // Tornar o usuário admin automaticamente
                     db.collection("admins").doc(user.uid).set({})
                     .then(() => {
                         isAdmin = true;
@@ -2486,7 +2470,6 @@
                         adminPanel.style.display = 'block';
                         showToast('Conta administrativa criada com sucesso!', 'success');
                         
-                        // Registrar o usuário
                         db.collection("users").doc(user.uid).set({
                             email: user.email,
                             name: "Administrador",
@@ -2561,7 +2544,6 @@
                 </div>
             `;
             
-            // Configurar link do WhatsApp (substitua SEUNUMERO pelo número real)
             const message = encodeURIComponent(
                 `Olá! Venci o leilão do item "${auction.title}" (Código: ${auction.code}). Gostaria de finalizar a compra.`
             );
