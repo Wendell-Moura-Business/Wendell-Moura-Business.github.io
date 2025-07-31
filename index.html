@@ -6,6 +6,7 @@
     <title>Leilão de Miniaturas Colecionáveis</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Estilos anteriores permanecem aqui */
         :root {
             --primary: #3572A5;
             --secondary: #6c757d;
@@ -1384,9 +1385,12 @@
         };
 
         // Inicializar Firebase
-        firebase.initializeApp(firebaseConfig);
+        const app = firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
         const auth = firebase.auth();
+        
+        // Configuração de segurança do Firestore
+        db.settings({ experimentalForceLongPolling: true });
         
         // Elemento de informações do admin
         const adminInfo = document.getElementById('admin-info');
@@ -1433,6 +1437,7 @@
         const purchaseDetails = document.getElementById('purchase-details');
         const btnWhatsapp = document.getElementById('btn-whatsapp');
         const btnClosePurchase = document.getElementById('btn-close-purchase');
+        const firebaseStatus = document.getElementById('firebase-status');
 
         // Estado da aplicação
         let currentTheme = 'light';
@@ -1737,8 +1742,12 @@
 
         // Carregar leilões do Firestore com tratamento de erro melhorado
         function loadAuctions() {
+            firebaseStatus.style.display = 'block';
+            firebaseStatus.textContent = 'Conectando ao Firebase...';
+            
             unsubscribeAuctions = db.collection("auctions").onSnapshot(
                 snapshot => {
+                    firebaseStatus.style.display = 'none';
                     auctions = [];
                     
                     if (snapshot.empty) {
@@ -1770,6 +1779,8 @@
                         "Permissão negada. Configure as regras do Firebase" : 
                         "Aguarde carregamento automático ou clique em atualizar.";
 
+                    firebaseStatus.textContent = errorMsg;
+                    
                     auctionsContainer.innerHTML = `
                         <div class="loading-auctions">
                             <i class="fas fa-exclamation-triangle"></i> 
