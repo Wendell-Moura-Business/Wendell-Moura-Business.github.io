@@ -6,7 +6,6 @@
     <title>Leilão de Miniaturas Colecionáveis</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Estilos permanecem os mesmos */
         :root {
             --primary: #3572A5;
             --secondary: #6c757d;
@@ -1196,9 +1195,10 @@
                         <option value="Edição Limitada">Edição Limitada</option>
                     </select>
                 </div>
+                <!-- Alteração aqui: de dias para minutos -->
                 <div class="admin-form-group">
-                    <label for="auction-duration">Duração (dias):</label>
-                    <input type="number" id="auction-duration" min="1" value="7" required>
+                    <label for="auction-duration">Duração (minutos):</label>
+                    <input type="number" id="auction-duration" min="1" value="60" required>
                 </div>
                 <div class="admin-form-group">
                     <label for="auction-start-bid">Lance Inicial (R$):</label>
@@ -1248,7 +1248,7 @@
                 <p>Bem-vindo ao nosso sistema de leilão de miniaturas colecionáveis! Aqui está como funciona:</p>
                 
                 <ol>
-                    <li><strong>Leilões por tempo limitado:</strong> Cada miniatura está disponível para leilão por um período determinado (geralmente 7 dias).</li>
+                    <li><strong>Leilões por tempo limitado:</strong> Cada miniatura está disponível para leilão por um período determinado (em minutos).</li>
                     <li><strong>Faça seu lance:</strong> Dê lances nos itens que deseja adquirir. Seu lance deve ser maior que o lance atual.</li>
                     <li><strong>Acompanhe o leilão:</strong> Acompanhe o tempo restante e os lances dos outros participantes.</li>
                     <li><strong>Finalização:</strong> Ao término do leilão, o participante com o maior lance é declarado vencedor.</li>
@@ -2043,18 +2043,14 @@
             });
         }
 
-        // Formatar tempo restante
+        // Formatar tempo restante (agora em minutos e segundos)
         function formatTime(ms) {
             if (ms <= 0) return '00:00:00';
             
             const sec = Math.floor(ms / 1000) % 60;
             const min = Math.floor(ms / (1000 * 60)) % 60;
-            const hrs = Math.floor(ms / (1000 * 60 * 60)) % 24;
-            const days = Math.floor(ms / (1000 * 60 * 60 * 24));
+            const hrs = Math.floor(ms / (1000 * 60 * 60));
             
-            if (days > 0) {
-                return `${days}d ${hrs.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-            }
             return `${hrs.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
         }
         
@@ -2282,15 +2278,16 @@
                 document.getElementById('auction-description').value = auction.description || '';
                 document.getElementById('auction-category').value = auction.category || '';
                 
-                const days = Math.floor(auction.duration / (1000 * 60 * 60 * 24));
-                document.getElementById('auction-duration').value = days || 7;
+                // Converter milissegundos para minutos
+                const minutes = Math.floor(auction.duration / (1000 * 60));
+                document.getElementById('auction-duration').value = minutes || 60;
                 
                 document.getElementById('auction-start-bid').value = auction.currentBid || '';
                 document.getElementById('auction-image').value = auction.image || '';
             }
         }
         
-        // Salvar leilão (admin)
+        // Salvar leilão (admin) com duração em minutos
         function saveAuction() {
             if (!isAdmin) {
                 showToast('Acesso não autorizado', 'error');
@@ -2301,12 +2298,14 @@
             const title = document.getElementById('auction-title').value;
             const description = document.getElementById('auction-description').value;
             const category = document.getElementById('auction-category').value;
-            const durationDays = parseInt(document.getElementById('auction-duration').value);
+            
+            // Alteração principal: duração em minutos
+            const durationMinutes = parseInt(document.getElementById('auction-duration').value);
             const startBid = parseFloat(document.getElementById('auction-start-bid').value);
             const image = document.getElementById('auction-image').value;
             
-            if (durationDays < 1) {
-                showToast('A duração deve ser de pelo menos 1 dia', 'error');
+            if (durationMinutes < 1) {
+                showToast('A duração deve ser de pelo menos 1 minuto', 'error');
                 return;
             }
             
@@ -2315,7 +2314,8 @@
                 return;
             }
             
-            const durationMs = durationDays * 24 * 60 * 60 * 1000;
+            // Converter minutos para milissegundos
+            const durationMs = durationMinutes * 60 * 1000;
             
             const auctionData = {
                 title,
@@ -2367,7 +2367,7 @@
             document.getElementById('auction-title').value = '';
             document.getElementById('auction-description').value = '';
             document.getElementById('auction-category').value = '';
-            document.getElementById('auction-duration').value = '7';
+            document.getElementById('auction-duration').value = '60'; // 60 minutos padrão
             document.getElementById('auction-start-bid').value = '';
             document.getElementById('auction-image').value = '';
         }
