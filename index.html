@@ -7,49 +7,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #3572A5;
-            --secondary: #6c757d;
-            --success: #28a745;
-            --info: #17a2b8;
-            --warning: #ffc107;
-            --danger: #dc3545;
+            --primary: #2c3e50;
+            --secondary: #7f8c8d;
+            --success: #27ae60;
+            --info: #3498db;
+            --warning: #f39c12;
+            --danger: #e74c3c;
             --light: #f8f9fa;
-            --dark: #343a40;
+            --dark: #1a1a1a;
             --card-bg: #ffffff;
-            --body-bg: #f0f2f5;
-            --border: #dee2e6;
-            --text: #212529;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --toast-bg: #333;
-            --toast-success: #28a745;
-            --toast-error: #dc3545;
-            --bid-color: #4CAF50;
-            --countdown-color: #E91E63;
-            --category-novo: #4CAF50;
-            --category-usado: #FF9800;
-            --category-fora-da-embalagem: #9C27B0;
-            --category-embalagem-original: #2196F3;
-            --category-raro: #F44336;
-            --category-edicao-limitada: #E91E63;
+            --body-bg: #f5f7fa;
+            --border: #e0e7ed;
+            --text: #34495e;
+            --shadow: rgba(0, 0, 0, 0.05);
+            --toast-bg: #2c3e50;
+            --bid-color: #27ae60;
+            --countdown-color: #e74c3c;
+            --category-novo: #27ae60;
+            --category-usado: #f39c12;
+            --category-fora-da-embalagem: #9b59b6;
+            --category-embalagem-original: #3498db;
+            --category-raro: #e74c3c;
+            --category-edicao-limitada: #e84393;
         }
 
         .dark-theme {
-            --primary: #4ea1db;
-            --secondary: #8a93a2;
-            --success: #34c759;
-            --info: #5bc0de;
-            --warning: #ffd43b;
-            --danger: #ff6b6b;
-            --light: #2d2d2d;
+            --primary: #2ecc71;
+            --secondary: #c5bdc7;
+            --success: #2ecc71;
+            --info: #3498db;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+            --light: #2d3436;
             --dark: #1a1a1a;
-            --card-bg: #333;
-            --body-bg: #222;
-            --border: #444;
-            --text: #f8f9fa;
-            --shadow: rgba(0, 0, 0, 0.3);
-            --toast-bg: #444;
-            --bid-color: #81C784;
-            --countdown-color: #F48FB1;
+            --card-bg: #2c3e50;
+            --body-bg: #1a252f;
+            --border: #34495e;
+            --text: #ecf1ed;
+            --shadow: rgba(0, 0, 0, 0.2);
+            --bid-color: #2ecc71;
+            --countdown-color: #e74c3c;
             --category-novo: #66BB6A;
             --category-usado: #FFA726;
             --category-fora-da-embalagem: #AB47BC;
@@ -62,16 +59,19 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--body-bg);
             color: var(--text);
-            padding: 20px;
+            padding: 15px;
             min-height: 100vh;
-            background-image: linear-gradient(135deg, var(--body-bg) 0%, #e6e9f0 100%);
+            line-height: 1.5;
+            font-weight: 400;
+            font-size: 14px;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
@@ -86,52 +86,53 @@
             margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 1px solid var(--border);
-            position: relative;
         }
 
         .header-left h1 {
-            font-size: 1.8rem;
+            font-size: 1.3rem;
+            font-weight: 600;
             color: var(--primary);
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .header-left p {
             color: var(--secondary);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            margin-top: 3px;
         }
 
         .header-right {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             align-items: center;
         }
 
-        #theme-toggle, #token-btn, #logout-btn {
+        .header-btn {
             background: none;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            border-radius: 5px;
-            padding: 10px;
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 8px;
+            padding: 8px;
             cursor: pointer;
-            font-size: 1.2rem;
-            width: 45px;
-            height: 45px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
         }
 
-        #theme-toggle:hover, #token-btn:hover, #logout-btn:hover {
-            background-color: var(--primary);
-            color: white;
+        .header-btn:hover {
+            background-color: var(--border);
+        }
+
+        .theme-icon {
+            filter: grayscale(100%) contrast(200%);
         }
 
         .auctions-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 18px;
             margin-bottom: 30px;
         }
 
@@ -139,12 +140,12 @@
             background-color: var(--card-bg);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 6px var(--shadow);
+            box-shadow: 0 2px 6px var(--shadow);
             border: 1px solid var(--border);
-            transition: transform 0.2s, box-shadow 0.3s;
-            position: relative;
             display: flex;
             flex-direction: column;
+            height: 100%;
+            transition: transform 0.2s, box-shadow 0.3s;
         }
 
         .auction-card:hover {
@@ -153,12 +154,13 @@
         }
 
         .auction-image {
-            height: 200px;
+            height: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             position: relative;
+            background-color: #f8f9fa;
         }
 
         .auction-image img {
@@ -168,25 +170,23 @@
         }
 
         .auction-image .image-placeholder {
-            font-size: 3rem;
-            color: #bdbdbd;
+            font-size: 2rem;
+            color: #e0e0e0;
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #f0f0f0 25%, #e0e0e0 25%, #e0e0e0 50%, #f0f0f0 50%, #f0f0f0 75%, #e0e0e0 75%);
-            background-size: 20px 20px;
         }
 
         .category-tag {
             position: absolute;
             top: 10px;
             left: 10px;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 14px;
+            font-size: 0.65rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: white;
@@ -205,10 +205,10 @@
             right: 10px;
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 14px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
         .card-content {
@@ -219,204 +219,244 @@
         }
 
         .card-title {
-            font-size: 1.2rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--primary);
             margin-bottom: 10px;
+            line-height: 1.3;
         }
 
         .card-description {
-            color: var(--text);
-            font-size: 0.9rem;
+            color: var(--secondary);
+            font-size: 0.8rem;
             margin-bottom: 15px;
             flex-grow: 1;
-            line-height: 1.5;
         }
 
         .bid-section {
-            margin-top: 10px;
-            padding-top: 15px;
-            border-top: 1px dashed var(--border);
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
         }
 
         .current-bid {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            align-items: center;
         }
 
         .bid-label {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--secondary);
         }
 
         .bid-amount {
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-weight: 600;
+            font-size: 1rem;
             color: var(--bid-color);
         }
 
         .bidder-name {
-            font-size: 0.85rem;
-            font-style: italic;
+            font-size: 0.75rem;
             color: var(--secondary);
-            margin-top: 3px;
             text-align: right;
         }
 
         .bid-form {
             display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
 
         .bid-input {
             flex-grow: 1;
-            padding: 10px;
+            padding: 8px 12px;
             border: 1px solid var(--border);
-            border-radius: 5px;
+            border-radius: 6px;
             background-color: var(--body-bg);
             color: var(--text);
-            font-size: 1rem;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            height: 36px;
         }
 
         .btn-bid {
             background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
+            border-radius: 6px;
+            padding: 0 12px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            height: 36px;
             transition: all 0.2s;
         }
 
         .btn-bid:hover {
             opacity: 0.9;
-            transform: translateY(-2px);
         }
 
-        .btn-bid:disabled {
-            background-color: var(--secondary);
-            cursor: not-allowed;
-            transform: none;
+        .winner-section {
+            background: rgba(39, 174, 96, 0.08);
+            border-left: 2px solid var(--success);
+            padding: 12px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 12px;
         }
-
-        .code-section {
-            background-color: var(--body-bg);
-            border-radius: 5px;
-            padding: 15px;
-            margin-top: 10px;
-            display: none;
+        
+        .winner-section h4 {
+            color: var(--success);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
         }
-
+        
         .code-generated {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
         }
-
+        
         .code-label {
-            font-weight: bold;
-            color: var(--primary);
+            font-weight: 500;
+            color: var(--text);
+            font-size: 0.8rem;
         }
-
+        
         .code-value {
             font-family: monospace;
-            font-size: 1.1rem;
-            background-color: var(--card-bg);
-            padding: 5px 10px;
-            border-radius: 5px;
-            letter-spacing: 2px;
+            font-size: 0.9rem;
+            background-color: var(--body-bg);
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 1px;
             border: 1px dashed var(--border);
             cursor: pointer;
-            transition: all 0.2s;
         }
-
-        .code-value:hover {
-            background-color: var(--info);
-            color: white;
-        }
-
-        .code-info {
-            font-size: 0.85rem;
-            color: var(--secondary);
-            margin-bottom: 10px;
-        }
-
-        .btn-code {
+        
+        .btn-purchase {
             background-color: var(--success);
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
+            border-radius: 6px;
+            padding: 8px 0;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 500;
             width: 100%;
-            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            margin-top: 8px;
         }
-
-        .btn-code:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        .btn-code:disabled {
-            background-color: var(--secondary);
-            cursor: not-allowed;
-            transform: none;
-        }
-
+        
         .auction-ended {
-            background-color: var(--danger);
-            color: white;
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--danger);
             text-align: center;
             padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 15px;
-            display: none;
+            border-radius: 6px;
+            font-weight: 500;
+            margin-top: 12px;
+            border: 1px solid rgba(231, 76, 60, 0.2);
+            font-size: 0.85rem;
         }
-
+        
         .status-bar {
-            padding: 12px;
+            padding: 12px 16px;
             background-color: var(--card-bg);
-            border-radius: 5px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--secondary);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text);
             border: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
         }
-
+        
         .filter-buttons {
             display: flex;
-            gap: 10px;
+            gap: 6px;
             flex-wrap: wrap;
         }
-
+        
         .filter-btn {
-            padding: 5px 10px;
-            border-radius: 15px;
+            padding: 5px 12px;
+            border-radius: 16px;
             border: 1px solid var(--border);
             background-color: var(--card-bg);
             color: var(--text);
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 500;
             transition: all 0.2s;
             white-space: nowrap;
         }
-
+        
         .filter-btn:hover, .filter-btn.active {
             background-color: var(--primary);
             color: white;
             border-color: var(--primary);
         }
-
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--info);
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+        }
+        
+        .btn-logout {
+            background: none;
+            border: none;
+            color: var(--info);
+            cursor: pointer;
+            margin-left: 6px;
+            font-size: 0.85rem;
+        }
+        
+        .admin-info {
+            background-color: rgba(243, 156, 18, 0.1);
+            color: var(--warning);
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(243, 156, 18, 0.2);
+        }
+        
+        .admin-controls {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .admin-toggle {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
         /* Modal de instruções */
         .modal {
             display: none;
@@ -430,601 +470,251 @@
             justify-content: center;
             align-items: center;
         }
-
+        
         .modal-content {
             background-color: var(--card-bg);
             border-radius: 10px;
             width: 90%;
-            max-width: 600px;
+            max-width: 450px;
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: modalFade 0.3s ease-out;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
-
-        @keyframes modalFade {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        
         .modal-header {
-            padding: 20px;
+            padding: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border);
         }
-
+        
         .modal-title {
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             color: var(--primary);
             font-weight: 600;
         }
-
+        
         .close-modal {
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             cursor: pointer;
             color: var(--secondary);
-            transition: all 0.2s;
         }
-
-        .close-modal:hover {
-            color: var(--danger);
-            transform: scale(1.1);
-        }
-
+        
         .modal-body {
-            padding: 20px;
+            padding: 16px;
             line-height: 1.6;
+            font-size: 0.9rem;
         }
-
+        
         .modal-body p {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            color: var(--text);
         }
-
+        
         .modal-footer {
-            padding: 20px;
+            padding: 16px;
             display: flex;
             justify-content: flex-end;
             gap: 10px;
             border-top: 1px solid var(--border);
         }
-
+        
         .btn-close {
             background-color: var(--secondary);
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
+            border-radius: 6px;
+            padding: 8px 16px;
             cursor: pointer;
             font-weight: 500;
-            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
         }
-
-        .btn-close:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
+        
+        /* Modal de compra compacto */
+        .compact-purchase {
+            padding: 0 16px 16px;
         }
-
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--toast-bg);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 5px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 2000;
+        
+        .compact-purchase h3 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+        
+        .purchase-summary {
+            background-color: var(--body-bg);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-left: 2px solid var(--success);
+            font-size: 0.85rem;
+        }
+        
+        .purchase-summary p {
+            margin-bottom: 8px;
             display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: fadeInOut 3s forwards;
-            opacity: 0;
+            justify-content: space-between;
         }
-
-        .toast.success {
-            background-color: var(--toast-success);
+        
+        .purchase-summary strong {
+            font-weight: 500;
         }
-
-        .toast.error {
-            background-color: var(--toast-error);
+        
+        .purchase-instructions {
+            margin-bottom: 15px;
         }
-
-        .toast.info {
-            background-color: var(--info);
+        
+        .purchase-instructions h4 {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: var(--primary);
         }
-
-        @keyframes fadeInOut {
-            0% { opacity: 0; bottom: 0; }
-            10% { opacity: 1; bottom: 20px; }
-            90% { opacity: 1; bottom: 20px; }
-            100% { opacity: 0; bottom: 0; }
+        
+        .purchase-instructions ol {
+            padding-left: 18px;
+            font-size: 0.85rem;
         }
-
-        .countdown {
-            color: var(--countdown-color);
-            font-weight: bold;
+        
+        .purchase-instructions li {
+            margin-bottom: 6px;
         }
-
-        .instructions-btn {
-            background-color: var(--info);
+        
+        .warning-note {
+            color: var(--danger);
+            font-weight: 500;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+        
+        .btn-whatsapp {
+            background-color: #25D366;
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 8px 15px;
+            border-radius: 6px;
+            padding: 8px 16px;
             cursor: pointer;
             font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
+            gap: 6px;
         }
-
-        .instructions-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        /* Admin Panel */
+        
+        /* Novo estilo para painel admin */
         .admin-panel {
             background-color: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 20px;
+            padding: 15px;
             margin-bottom: 20px;
             display: none;
-            box-shadow: 0 4px 8px var(--shadow);
+            box-shadow: 0 2px 6px var(--shadow);
         }
-
+        
         .admin-panel h2 {
             color: var(--primary);
             margin-bottom: 15px;
             border-bottom: 1px solid var(--border);
             padding-bottom: 10px;
+            font-size: 1.1rem;
         }
-
+        
         .admin-form {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
         }
-
+        
         .admin-form-group {
             display: flex;
             flex-direction: column;
             margin-bottom: 10px;
         }
-
+        
         .admin-form-group label {
             margin-bottom: 5px;
             font-weight: 500;
             color: var(--text);
+            font-size: 0.8rem;
         }
-
+        
         .admin-form-group input,
         .admin-form-group textarea,
         .admin-form-group select {
-            padding: 10px;
+            padding: 8px;
             border: 1px solid var(--border);
-            border-radius: 5px;
+            border-radius: 6px;
             background-color: var(--body-bg);
             color: var(--text);
-            font-size: 1rem;
+            font-size: 0.85rem;
         }
-
+        
         .admin-form-group textarea {
-            height: 100px;
+            height: 80px;
             resize: vertical;
         }
-
+        
         .btn-admin {
-            background-color: var(--warning);
-            color: var(--dark);
+            background-color: var(--primary);
+            color: white;
             border: none;
-            border-radius: 5px;
-            padding: 12px 15px;
+            border-radius: 6px;
+            padding: 8px 15px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 500;
             grid-column: span 2;
             transition: all 0.2s;
             margin-top: 10px;
+            font-size: 0.85rem;
         }
-
+        
         .btn-admin:hover {
             opacity: 0.9;
-            transform: translateY(-2px);
         }
-
-        .admin-controls {
-            margin-bottom: 15px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .admin-toggle {
-            background-color: var(--warning);
-            color: var(--dark);
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.2s;
-        }
-
-        .admin-toggle:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
+        
         .bid-history {
             margin-top: 15px;
             max-height: 150px;
             overflow-y: auto;
             border: 1px solid var(--border);
-            border-radius: 5px;
+            border-radius: 6px;
             padding: 10px;
             background-color: var(--body-bg);
+            font-size: 0.8rem;
         }
-
+        
         .bid-history-item {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
+            padding: 6px 0;
             border-bottom: 1px solid var(--border);
         }
-
+        
         .bid-history-item:last-child {
             border-bottom: none;
         }
-
+        
         .bid-history-name {
             font-weight: 500;
             color: var(--text);
         }
-
+        
         .bid-history-amount {
             color: var(--bid-color);
             font-weight: bold;
         }
-
+        
         .bid-history-time {
-            font-size: 0.8rem;
-            color: var(--secondary);
-        }
-
-        /* Admin Login */
-        .login-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .login-content {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            width: 90%;
-            max-width: 400px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: modalFade 0.3s ease-out;
-            position: relative;
-        }
-
-        .login-title {
-            text-align: center;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .login-input {
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 5px;
-            background-color: var(--body-bg);
-            color: var(--text);
-            font-size: 1rem;
-        }
-
-        .btn-login {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-
-        .btn-login:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        .login-error {
-            color: var(--danger);
-            font-size: 0.9rem;
-            text-align: center;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .close-login-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--secondary);
-            transition: all 0.2s;
-        }
-
-        .close-login-modal:hover {
-            color: var(--danger);
-            transform: scale(1.1);
-        }
-
-        /* Firebase Status */
-        .firebase-status {
-            padding: 10px;
-            background: var(--info);
-            color: white;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            text-align: center;
-            display: none;
-        }
-        
-        .loading-auctions {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px;
-            font-size: 1.2rem;
+            font-size: 0.7rem;
             color: var(--secondary);
         }
         
-        .no-auctions {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px;
-            font-size: 1.2rem;
-            color: var(--secondary);
-        }
-        
-        .admin-info {
-            background-color: var(--info);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 15px;
-            background-color: var(--success);
-            color: white;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
-        
-        .btn-logout {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-        
-        .winner-badge {
-            background-color: var(--warning);
-            color: var(--dark);
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            margin-left: 5px;
-        }
-        
-        /* Token modal */
-        .token-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .token-content {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: modalFade 0.3s ease-out;
-            position: relative;
-            text-align: center;
-        }
-        
-        .token-display {
-            font-family: monospace;
-            font-size: 1.4rem;
-            background-color: var(--body-bg);
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-            border: 1px dashed var(--border);
-            word-break: break-all;
-        }
-        
-        .token-actions {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .btn-token {
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-        
-        .btn-copy {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .btn-close-token {
-            background-color: var(--secondary);
-            color: white;
-        }
-        
-        .token-hint {
-            font-size: 0.9rem;
-            color: var(--secondary);
-            margin-top: 15px;
-        }
-        
-        /* Token Setup Modal */
-        .token-setup-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .token-setup-content {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: modalFade 0.3s ease-out;
-            position: relative;
-            text-align: center;
-        }
-        
-        .token-setup-tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .token-tab {
-            flex: 1;
-            padding: 10px;
-            cursor: pointer;
-            text-align: center;
-            border-bottom: 3px solid transparent;
-        }
-        
-        .token-tab.active {
-            border-bottom: 3px solid var(--primary);
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .token-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .token-input {
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 5px;
-            background-color: var(--body-bg);
-            color: var(--text);
-            font-size: 1rem;
-        }
-        
-        .btn-token-submit {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-        
-        .btn-token-submit:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-        
-        .token-info {
-            background-color: var(--body-bg);
-            border-radius: 5px;
-            padding: 15px;
-            margin-top: 20px;
-            text-align: left;
-            font-size: 0.9rem;
-        }
-        
-        .token-info h4 {
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-        
-        .token-info ul {
-            padding-left: 20px;
-            margin-top: 10px;
-        }
-        
-        .token-info li {
-            margin-bottom: 8px;
-        }
-        
-        /* Paginação */
         .pagination-controls {
-            grid-column: 1 / -1;
             display: flex;
             justify-content: center;
             gap: 15px;
@@ -1035,131 +725,122 @@
         .page-info {
             font-weight: bold;
             color: var(--primary);
+            font-size: 0.9rem;
         }
         
         .btn-pagination {
             background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 8px 15px;
+            border-radius: 6px;
+            padding: 6px 12px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 500;
+            font-size: 0.85rem;
             transition: all 0.2s;
         }
         
         .btn-pagination:hover {
             opacity: 0.9;
-            transform: translateY(-2px);
         }
         
         .btn-pagination:disabled {
             background-color: var(--secondary);
             cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Nova seção para o vencedor */
-        .winner-section {
-            background: linear-gradient(to right, #f0f2f5, #f0f2f5);
-            border-left: 3px solid #dee2e6;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            animation: fadeIn 0.5s ease-in-out;
         }
         
-        .winner-section h4 {
-            color: #e91e63;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .winner-section .code-value {
-            background-color: #fff;
-            color: #e91e63;
+        .winner-badge {
+            background-color: var(--warning);
+            color: var(--dark);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.7rem;
             font-weight: bold;
-            border: 1px solid #ff9800;
+            margin-left: 5px;
         }
         
-        .btn-purchase {
-            background: linear-gradient(to right, #4CAF50, #2E7D32);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
+        .loading-auctions {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+        
+        .no-auctions {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+        
+        .firebase-status {
+            padding: 10px;
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--info);
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: center;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            font-size: 0.85rem;
+        }
+
+        /* Ajustes de tema escuro para texto */
+        .dark-theme .card-description,
+        .dark-theme .bidder-name,
+        .dark-theme .bid-label,
+        .dark-theme .code-label,
+        .dark-theme .purchase-summary,
+        .dark-theme .purchase-summary strong {
+            color: #bdc3c7 !important;
+        }
+
+        /* Modal de configuração de token */
+        .token-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .token-tab {
+            padding: 8px 16px;
             cursor: pointer;
-            font-weight: 600;
-            width: 100%;
-            transition: all 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin-top: 10px;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
         }
         
-        .btn-purchase:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        .token-tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Estilos para o modal de compra */
-        .purchase-summary {
-            background-color: var(--body-bg);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
-            border-left: 4px solid var(--success);
+        .token-form {
+            display: none;
         }
         
-        .purchase-summary p {
-            margin: 8px 0;
-            display: flex;
+        .token-form.active {
+            display: block;
         }
         
-        .purchase-summary strong {
-            min-width: 120px;
-            display: inline-block;
-        }
-
-        /* Botão de logout */
-        #logout-btn {
-            display: none; /* Inicialmente oculto */
-        }
-
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
-            .header-right {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
             .auctions-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 12px;
             }
-
+            
             .status-bar {
                 flex-direction: column;
                 gap: 10px;
+                align-items: flex-start;
             }
 
             .filter-buttons {
-                flex-wrap: wrap;
-                justify-content: center;
+                width: 100%;
+                justify-content: flex-start;
             }
             
             .admin-form {
@@ -1169,24 +850,23 @@
             .btn-admin {
                 grid-column: span 1;
             }
-            
-            .token-actions {
-                flex-direction: column;
-            }
         }
 
         @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .auction-image {
+                height: 130px;
+            }
+            
             .bid-form {
                 flex-direction: column;
             }
             
             .btn-bid {
                 width: 100%;
-            }
-            
-            .pagination-controls {
-                flex-direction: column;
-                gap: 10px;
             }
         }
     </style>
@@ -1196,24 +876,26 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
 </head>
-<body>
+<body class="dark-theme">
     <div class="container">
         <header>
             <div class="header-left">
                 <h1>Leilão de Miniaturas Colecionáveis</h1>
-                <p>Adquira miniaturas exclusivas através de leilões com tempo limitado</p>
+                <p>Peças exclusivas com tempo limitado</p>
             </div>
             <div class="header-right">
-                <button class="instructions-btn" id="instructions-btn">
-                    <i class="fas fa-info-circle"></i> Instruções
+                <button class="header-btn" id="instructions-btn" title="Instruções">
+                    <i class="fas fa-info"></i>
                 </button>
-                <button id="token-btn" title="Gerenciar Token">
+                <button class="header-btn" id="token-btn" title="Gerenciar Token">
                     <i class="fas fa-key"></i>
                 </button>
-                <button id="logout-btn" title="Sair do Sistema">
+                <button class="header-btn" id="logout-btn" title="Sair">
                     <i class="fas fa-sign-out-alt"></i>
                 </button>
-                <button id="theme-toggle" aria-label="Alternar tema entre claro e escuro">🌙</button>
+                <button class="header-btn" id="theme-toggle" title="Alternar tema">
+                    <span class="theme-icon">☀️</span>
+                </button>
             </div>
         </header>
         
@@ -1287,12 +969,6 @@
             </div>
         </div>
 
-        <div class="auctions-grid" id="auctions-container">
-            <div class="loading-auctions">
-                <i class="fas fa-spinner fa-spin"></i> Carregando leilões...
-            </div>
-        </div>
-
         <div class="status-bar" id="status-bar">
             <div id="status-text">Carregando leilões...</div>
             <div class="filter-buttons">
@@ -1307,119 +983,40 @@
                 <button class="filter-btn" data-filter="Edição Limitada">Edição Limitada</button>
             </div>
         </div>
+        
+        <div class="auctions-grid" id="auctions-container">
+            <div class="loading-auctions">
+                <i class="fas fa-spinner fa-spin"></i> Carregando leilões...
+            </div>
+        </div>
+
+        <div class="pagination-controls" id="pagination-controls">
+            <!-- Paginação será gerada dinamicamente -->
+        </div>
     </div>
 
     <!-- Modal de instruções -->
     <div class="modal" id="instructions-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Como Funciona o Leilão</h2>
-                <button class="close-modal" aria-label="Fechar modal">&times;</button>
+                <h2 class="modal-title">Como Funciona</h2>
+                <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>Bem-vindo ao nosso sistema de leilão de miniaturas colecionáveis! Aqui está como funciona:</p>
+                <p>Bem-vindo ao nosso sistema de leilão de miniaturas:</p>
                 
                 <ol>
-                    <li><strong>Leilões por tempo limitado:</strong> Cada miniatura está disponível para leilão por um período determinado (em minutos).</li>
-                    <li><strong>Faça seu lance:</strong> Dê lances nos itens que deseja adquirir. Seu lance deve ser maior que o lance atual.</li>
-                    <li><strong>Acompanhe o leilão:</strong> Acompanhe o tempo restante e os lances dos outros participantes.</li>
-                    <li><strong>Finalização:</strong> Ao término do leilão, o participante com o maior lance é declarado vencedor.</li>
-                    <li><strong>Código de compra:</strong> O vencedor pode gerar um código único que garante o direito de compra.</li>
-                    <li><strong>Resgate:</strong> Entre em contato conosco via WhatsApp ou e-mail com seu código para finalizar a compra.</li>
+                    <li><strong>Leilões por tempo limitado</strong> - Cada item tem duração determinada</li>
+                    <li><strong>Faça seu lance</strong> - Deve ser maior que o atual</li>
+                    <li><strong>Acompanhe</strong> - Tempo restante e lances concorrentes</li>
+                    <li><strong>Finalização</strong> - Maior lance vence ao término</li>
+                    <li><strong>Código de compra</strong> - Gere código único para resgate</li>
                 </ol>
                 
-                <p><strong>Importante:</strong> Cada código é único e intransferível. Uma vez gerado, não pode ser regenerado para o mesmo item.</p>
-                
-                <p>Qualquer dúvida, entre em contato: contato@leilaominiaturas.com.br</p>
+                <p><strong>Importante:</strong> Código válido por 7 dias.</p>
             </div>
             <div class="modal-footer">
                 <button class="btn-close" id="btn-close-instructions">Fechar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Login Admin -->
-    <div class="login-modal" id="login-modal">
-        <div class="login-content">
-            <button class="close-login-modal" id="close-login-modal" aria-label="Fechar modal">&times;</button>
-            <h2 class="login-title">Acesso Administrativo</h2>
-            <div class="login-form">
-                <input type="email" class="login-input" id="admin-email" placeholder="E-mail" required>
-                <input type="password" class="login-input" id="admin-password" placeholder="Senha" required>
-                <button class="btn-login" id="btn-login">Entrar</button>
-                <div class="login-error" id="login-error"></div>
-                <p class="login-hint" style="font-size: 0.9rem; color: var(--secondary); text-align: center; margin-top: 10px;">
-                    <i class="fas fa-info-circle"></i> Certifique-se de usar o mesmo e-mail/senha cadastrados no Firebase
-                </p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Token Modal -->
-    <div class="token-modal" id="token-modal">
-        <div class="token-content">
-            <h2>Seu Token de Acesso</h2>
-            <p>Este token identifica você em qualquer dispositivo. Guarde-o com segurança!</p>
-            
-            <div class="token-display" id="token-display">
-                Carregando seu token...
-            </div>
-            
-            <div class="token-actions">
-                <button class="btn-token btn-copy" id="copy-token">
-                    <i class="fas fa-copy"></i> Copiar Token
-                </button>
-                <button class="btn-token btn-close-token" id="close-token-modal">
-                    Fechar
-                </button>
-            </div>
-            
-            <p class="token-hint">
-                <i class="fas fa-info-circle"></i> Sem este token, você não poderá dar lances ou gerar códigos de compra em outros dispositivos.
-            </p>
-        </div>
-    </div>
-    
-    <!-- Token Setup Modal -->
-    <div class="token-setup-modal" id="token-setup-modal">
-        <div class="token-setup-content">
-            <button class="close-login-modal" id="close-token-setup" aria-label="Fechar modal">&times;</button>
-            <h2>Configuração do Token</h2>
-            <p>Você precisa de um token para participar dos leilões.</p>
-            
-            <div class="token-setup-tabs">
-                <div class="token-tab active" id="tab-new-token">Novo Token</div>
-                <div class="token-tab" id="tab-existing-token">Usar Token Existente</div>
-            </div>
-            
-            <div class="token-form" id="new-token-form">
-                <input type="text" class="token-input" id="user-name" placeholder="Seu nome ou apelido" required>
-                <button class="btn-token-submit" id="btn-create-token">Criar Novo Token</button>
-                
-                <div class="token-info">
-                    <h4>Como funciona:</h4>
-                    <ul>
-                        <li>Este token será sua identidade única em nosso sistema</li>
-                        <li>Você precisará dele para participar de leilões</li>
-                        <li>Guarde seu token em um local seguro</li>
-                        <li>Com este token você pode acessar de qualquer dispositivo</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="token-form" id="existing-token-form" style="display: none;">
-                <input type="text" class="token-input" id="existing-token" placeholder="Cole seu token aqui" required>
-                <button class="btn-token-submit" id="btn-use-token">Usar Token</button>
-                
-                <div class="token-info">
-                    <h4>Onde encontrar seu token:</h4>
-                    <ul>
-                        <li>Verifique seu e-mail (se você recebeu um token por e-mail)</li>
-                        <li>Procure na pasta de downloads (se você salvou em um arquivo)</li>
-                        <li>Verifique no dispositivo onde você participou anteriormente</li>
-                        <li>Caso tenha perdido, entre em contato conosco</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
@@ -1429,1235 +1026,1140 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Finalizar Compra</h2>
-                <button class="close-modal" aria-label="Fechar modal">&times;</button>
+                <button class="close-modal">&times;</button>
             </div>
-            <div class="modal-body">
-                <div id="purchase-details">
-                    <p><i class="fas fa-spinner fa-spin"></i> Carregando informações da compra...</p>
+            <div class="compact-purchase">
+                <h3 id="purchase-title">Carregando...</h3>
+                
+                <div class="purchase-summary">
+                    <p>
+                        <strong>Código:</strong> 
+                        <span class="code-value" id="purchase-code">MINI-XXXX-XXXX</span>
+                    </p>
+                    <p>
+                        <strong>Valor:</strong> 
+                        <span id="purchase-value">R$ 0,00</span>
+                    </p>
+                    <p>
+                        <strong>Status:</strong> 
+                        <span id="purchase-status">Aguardando confirmação</span>
+                    </p>
                 </div>
+                
+                <div class="purchase-instructions">
+                    <h4>Como proceder:</h4>
+                    <ol>
+                        <li>Copie seu código de compra</li>
+                        <li>Contate-nos via WhatsApp ou email</li>
+                        <li>Informe o código e o item</li>
+                        <li>Combine pagamento e entrega</li>
+                    </ol>
+                </div>
+                
+                <p class="warning-note">
+                    <i class="fas fa-exclamation-circle"></i> Código válido por 7 dias
+                </p>
             </div>
             <div class="modal-footer">
                 <button class="btn-close" id="btn-close-purchase">Fechar</button>
-                <button class="btn-admin" id="btn-whatsapp" style="background-color: #25D366;">
-                    <i class="fab fa-whatsapp"></i> Contato via WhatsApp
+                <button class="btn-whatsapp" id="btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
                 </button>
             </div>
         </div>
     </div>
 
-<script>
-        // Configuração do Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyCga4CzijGpy17NqR2sdihDE7ZWOmCCxAg",
-            authDomain: "leilao-miniaturas.firebaseapp.com",
-            projectId: "leilao-miniaturas",
-            storageBucket: "leilao-miniaturas.appspot.com",
-            messagingSenderId: "1018132174825",
-            appId: "1:1018132174825:web:7e4a1afef702d6e7f2dd78"
-        };
+    <!-- Modal de Token -->
+    <div class="modal" id="token-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Seu Token de Acesso</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Este token identifica você em qualquer dispositivo. Guarde-o com segurança!</p>
+                <div style="background-color: var(--body-bg); padding: 15px; border-radius: 6px; margin: 15px 0; text-align: center;">
+                    <strong id="token-display">TOK-XXXXXXXX</strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-close" id="btn-close-token">Fechar</button>
+                <button class="btn-admin" id="copy-token">
+                    <i class="fas fa-copy"></i> Copiar Token
+                </button>
+            </div>
+        </div>
+    </div>
 
-        // Inicializar Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const auth = firebase.auth();
-        
-        // Elemento de informações do admin
-        const adminInfo = document.getElementById('admin-info');
-        const userInfo = document.getElementById('user-info');
-        const userEmail = document.getElementById('user-email');
-        const logoutBtn = document.getElementById('logout-btn');
-
-        // Elementos DOM
-        const auctionsContainer = document.getElementById('auctions-container');
-        const themeToggle = document.getElementById('theme-toggle');
-        const tokenBtn = document.getElementById('token-btn');
-        const tokenModal = document.getElementById('token-modal');
-        const tokenDisplay = document.getElementById('token-display');
-        const copyTokenBtn = document.getElementById('copy-token');
-        const closeTokenModal = document.getElementById('close-token-modal');
-        const tokenSetupModal = document.getElementById('token-setup-modal');
-        const closeTokenSetup = document.getElementById('close-token-setup');
-        const tabNewToken = document.getElementById('tab-new-token');
-        const tabExistingToken = document.getElementById('tab-existing-token');
-        const newTokenForm = document.getElementById('new-token-form');
-        const existingTokenForm = document.getElementById('existing-token-form');
-        const btnCreateToken = document.getElementById('btn-create-token');
-        const btnUseToken = document.getElementById('btn-use-token');
-        const userNameInput = document.getElementById('user-name');
-        const existingTokenInput = document.getElementById('existing-token');
-        const statusText = document.getElementById('status-text');
-        const instructionsBtn = document.getElementById('instructions-btn');
-        const instructionsModal = document.getElementById('instructions-modal');
-        const closeModalBtn = document.querySelector('.close-modal');
-        const btnCloseInstructions = document.getElementById('btn-close-instructions');
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const adminToggle = document.getElementById('admin-toggle');
-        const adminPanel = document.getElementById('admin-panel');
-        const auctionIdSelect = document.getElementById('auction-id');
-        const saveAuctionBtn = document.getElementById('save-auction');
-        const makeAdminBtn = document.getElementById('make-admin');
-        const loginModal = document.getElementById('login-modal');
-        const adminEmailInput = document.getElementById('admin-email');
-        const adminPasswordInput = document.getElementById('admin-password');
-        const btnLogin = document.getElementById('btn-login');
-        const loginError = document.getElementById('login-error');
-        const closeLoginModal = document.getElementById('close-login-modal');
-        const btnLogout = document.getElementById('btn-logout');
-        const purchaseModal = document.getElementById('purchase-modal');
-        const purchaseDetails = document.getElementById('purchase-details');
-        const btnWhatsapp = document.getElementById('btn-whatsapp');
-        const btnClosePurchase = document.getElementById('btn-close-purchase');
-        const firebaseStatus = document.getElementById('firebase-status');
-
-        // Estado da aplicação
-        let currentTheme = 'light';
-        let userToken = localStorage.getItem('userToken') || null;
-        let userName = localStorage.getItem('userName') || null;
-        let currentFilter = 'all';
-        let auctions = [];
-        let isAdmin = localStorage.getItem('isAdmin') === 'true';
-        let unsubscribeAuctions = null;
-        let currentPage = 1;
-        const auctionsPerPage = 6;
-        let totalAuctions = 0;
-
-        // Garantir token em maiúsculas
-        if (userToken) {
-            userToken = userToken.toUpperCase();
-            localStorage.setItem('userToken', userToken);
-        }
-
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', () => {
-            // Verificar token válido
-            if (userToken && (!userToken.startsWith('TOK-') || userToken.length !== 12)) {
-                showToast('Token inválido detectado. Por favor, gere um novo', 'error');
-                localStorage.removeItem('userToken');
-                localStorage.removeItem('userName');
-                userToken = null;
-                userName = null;
-            }
-            
-            // Configurar token se necessário
-            if (!userToken) {
-                setTimeout(() => {
-                    tokenSetupModal.style.display = 'flex';
-                }, 1000);
-            } else {
-                loadAuctions();
-            }
-            
-            // Inicializar Firebase Auth
-            auth.onAuthStateChanged(user => {
-                if (user) {
-                    userInfo.style.display = 'flex';
-                    userEmail.textContent = user.email;
-                    
-                    // Verificar se o usuário é admin
-                    checkAdminStatus(user.uid).then(isAdminUser => {
-                        if (isAdminUser) {
-                            adminInfo.style.display = 'block';
-                        }
-                        if (userToken) loadAuctions();
-                    });
-                } else {
-                    userInfo.style.display = 'none';
-                    adminInfo.style.display = 'none';
-                    if (userToken) loadAuctions();
-                }
-            });
-            
-            // Event listeners
-            themeToggle.addEventListener('click', toggleTheme);
-            tokenBtn.addEventListener('click', showTokenModal);
-            copyTokenBtn.addEventListener('click', copyTokenToClipboard);
-            closeTokenModal.addEventListener('click', () => {
-                tokenModal.style.display = 'none';
-            });
-            closeTokenSetup.addEventListener('click', () => {
-                tokenSetupModal.style.display = 'none';
-            });
-            instructionsBtn.addEventListener('click', () => {
-                instructionsModal.style.display = 'flex';
-            });
-            closeModalBtn.addEventListener('click', closeInstructionsModal);
-            btnCloseInstructions.addEventListener('click', closeInstructionsModal);
-            closeLoginModal.addEventListener('click', () => {
-                loginModal.style.display = 'none';
-            });
-            logoutBtn.addEventListener('click', handleLogout);
-            btnLogout.addEventListener('click', handleLogout);
-            btnClosePurchase.addEventListener('click', () => {
-                purchaseModal.style.display = 'none';
-            });
-            
-            // Tabs do token setup
-            tabNewToken.addEventListener('click', () => {
-                tabNewToken.classList.add('active');
-                tabExistingToken.classList.remove('active');
-                newTokenForm.style.display = 'flex';
-                existingTokenForm.style.display = 'none';
-            });
-            
-            tabExistingToken.addEventListener('click', () => {
-                tabExistingToken.classList.add('active');
-                tabNewToken.classList.remove('active');
-                newTokenForm.style.display = 'none';
-                existingTokenForm.style.display = 'flex';
-            });
-            
-            // Criar novo token
-            btnCreateToken.addEventListener('click', createNewToken);
-            
-            // Usar token existente
-            btnUseToken.addEventListener('click', useExistingToken);
-            
-            // Fechar modais ao clicar fora do conteúdo
-            document.addEventListener('click', (e) => {
-                if (e.target === instructionsModal) {
-                    instructionsModal.style.display = 'none';
-                }
-                if (e.target === loginModal) {
-                    loginModal.style.display = 'none';
-                }
-                if (e.target === tokenModal) {
-                    tokenModal.style.display = 'none';
-                }
-                if (e.target === tokenSetupModal) {
-                    tokenSetupModal.style.display = 'none';
-                }
-                if (e.target === purchaseModal) {
-                    purchaseModal.style.display = 'none';
-                }
-            });
-            
-            // Filtros
-            filterButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    currentFilter = btn.dataset.filter;
-                    currentPage = 1;
-                    renderAuctions();
-                });
-            });
-            
-            // Admin
-            adminToggle.addEventListener('click', toggleAdminPanel);
-            saveAuctionBtn.addEventListener('click', saveAuction);
-            makeAdminBtn.addEventListener('click', makeAdmin);
-            btnLogin.addEventListener('click', handleLogin);
-            auctionIdSelect.addEventListener('change', fillAdminForm);
-            
-            // Carregar tema salvo
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-theme');
-                themeToggle.textContent = '☀️';
-                currentTheme = 'dark';
-            }
-            
-            // Adicionar evento para fechar ao sair da página
-            window.addEventListener('beforeunload', () => {
-                if (unsubscribeAuctions) unsubscribeAuctions();
-                if (window.auctionTimers) {
-                    window.auctionTimers.forEach(timer => clearInterval(timer));
-                }
-            });
-            
-            // Delegar eventos para elementos dinâmicos
-            document.addEventListener('click', function(e) {
-                // Copiar código de compra
-                if (e.target.classList.contains('code-value')) {
-                    copyCodeToClipboard(e.target.textContent);
-                }
+    <!-- Modal de Configuração de Token -->
+    <div class="modal" id="token-setup-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Configuração do Token</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="token-tabs">
+                    <button class="token-tab active" data-tab="new-token">Novo Token</button>
+                    <button class="token-tab" data-tab="existing-token">Usar Token Existente</button>
+                </div>
                 
-                // Botão de finalizar compra
-                if (e.target.id && e.target.id.startsWith('purchase-btn-')) {
-                    const auctionId = e.target.dataset.id;
-                    const auction = auctions.find(a => a.id === auctionId);
-                    if (auction) {
-                        showPurchaseDetails(auction);
+                <div id="new-token-form" class="token-form active">
+                    <div class="admin-form-group">
+                        <label for="user-name">Seu Nome ou Apelido</label>
+                        <input type="text" id="user-name" required>
+                    </div>
+                    <button class="btn-bid" id="btn-create-token">Criar Novo Token</button>
+                </div>
+                
+                <div id="existing-token-form" class="token-form">
+                    <div class="admin-form-group">
+                        <label for="existing-token">Cole seu Token aqui</label>
+                        <input type="text" id="existing-token" required>
+                    </div>
+                    <button class="btn-bid" id="btn-use-token">Usar Token</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Login Admin -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Acesso Administrativo</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <input type="email" class="bid-input" id="admin-email" placeholder="E-mail" required>
+                    <input type="password" class="bid-input" id="admin-password" placeholder="Senha" required>
+                    <button class="btn-bid" id="btn-login">Entrar</button>
+                    <div id="login-error" style="color: var(--danger); text-align: center; display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    // Configuração do Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyCga4CzijGpy17NqR2sdihDE7ZWOmCCxAg",
+        authDomain: "leilao-miniaturas.firebaseapp.com",
+        projectId: "leilao-miniaturas",
+        storageBucket: "leilao-miniaturas.appspot.com",
+        messagingSenderId: "1018132174825",
+        appId: "1:1018132174825:web:7e4a1afef702d6e7f2dd78"
+    };
+
+    // Inicializar Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+    
+    // Elementos DOM
+    const auctionsContainer = document.getElementById('auctions-container');
+    const themeToggle = document.getElementById('theme-toggle');
+    const tokenBtn = document.getElementById('token-btn');
+    const tokenModal = document.getElementById('token-modal');
+    const tokenSetupModal = document.getElementById('token-setup-modal');
+    const tokenDisplay = document.getElementById('token-display');
+    const copyTokenBtn = document.getElementById('copy-token');
+    const closeTokenModal = document.getElementById('btn-close-token');
+    const instructionsBtn = document.getElementById('instructions-btn');
+    const instructionsModal = document.getElementById('instructions-modal');
+    const closeModalBtn = document.querySelector('.close-modal');
+    const btnCloseInstructions = document.getElementById('btn-close-instructions');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const adminToggle = document.getElementById('admin-toggle');
+    const adminPanel = document.getElementById('admin-panel');
+    const auctionIdSelect = document.getElementById('auction-id');
+    const saveAuctionBtn = document.getElementById('save-auction');
+    const makeAdminBtn = document.getElementById('make-admin');
+    const loginModal = document.getElementById('login-modal');
+    const adminEmailInput = document.getElementById('admin-email');
+    const adminPasswordInput = document.getElementById('admin-password');
+    const btnLogin = document.getElementById('btn-login');
+    const loginError = document.getElementById('login-error');
+    const logoutBtn = document.getElementById('logout-btn');
+    const btnLogout = document.getElementById('btn-logout');
+    const purchaseModal = document.getElementById('purchase-modal');
+    const btnWhatsapp = document.getElementById('btn-whatsapp');
+    const btnClosePurchase = document.getElementById('btn-close-purchase');
+    const firebaseStatus = document.getElementById('firebase-status');
+    const adminInfo = document.getElementById('admin-info');
+    const userInfo = document.getElementById('user-info');
+    const userEmail = document.getElementById('user-email');
+    const statusText = document.getElementById('status-text');
+    const paginationControls = document.getElementById('pagination-controls');
+    const purchaseTitle = document.getElementById('purchase-title');
+    const purchaseCode = document.getElementById('purchase-code');
+    const purchaseValue = document.getElementById('purchase-value');
+    const purchaseStatus = document.getElementById('purchase-status');
+    const tokenSetupTabs = document.querySelectorAll('.token-tab');
+    const tokenForms = document.querySelectorAll('.token-form');
+    const btnCreateToken = document.getElementById('btn-create-token');
+    const btnUseToken = document.getElementById('btn-use-token');
+    const userNameInput = document.getElementById('user-name');
+    const existingTokenInput = document.getElementById('existing-token');
+
+    // Estado da aplicação
+    let currentTheme = 'dark';
+    let userToken = localStorage.getItem('userToken') || null;
+    let userName = localStorage.getItem('userName') || null;
+    let currentFilter = 'all';
+    let auctions = [];
+    let isAdmin = localStorage.getItem('isAdmin') === 'true';
+    let unsubscribeAuctions = null;
+    let currentPage = 1;
+    const auctionsPerPage = 4;
+    let totalAuctions = 0;
+    let auctionTimers = [];
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', () => {
+        // Inicializar Firebase Auth
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                userInfo.style.display = 'flex';
+                userEmail.textContent = user.email;
+                
+                // Verificar se o usuário é admin
+                checkAdminStatus(user.uid).then(isAdminUser => {
+                    if (isAdminUser) {
+                        adminInfo.style.display = 'block';
                     }
-                }
-            });
+                });
+            } else {
+                userInfo.style.display = 'none';
+                adminInfo.style.display = 'none';
+            }
         });
 
-        // Criar novo token
-        function createNewToken() {
-            const name = userNameInput.value.trim();
-            
-            if (!name || name.length < 3) {
-                showToast('Por favor, insira um nome com pelo menos 3 caracteres', 'error');
-                return;
-            }
-            
-            // Gerar token
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let randomPart = '';
-            for (let i = 0; i < 8; i++) {
-                randomPart += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            
-            userToken = 'TOK-' + randomPart;
-            
-            // Salvar localmente
-            localStorage.setItem('userToken', userToken);
-            localStorage.setItem('userName', name);
-            userName = name;
-            
-            // Salvar no Firestore
-            db.collection("users").doc(userToken).set({
-                name: name,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                tokenSetupModal.style.display = 'none';
-                showTokenModal();
-                showToast('Token criado com sucesso!', 'success');
-                loadAuctions();
-            })
-            .catch(error => {
-                console.error("Erro ao salvar token:", error);
-                showToast('Erro ao criar token. Por favor, tente novamente.', 'error');
-            });
-        }
-
-        // Usar token existente
-        function useExistingToken() {
-            let token = existingTokenInput.value.trim().toUpperCase();
-            
-            // Validar formato
-            if (!token.startsWith('TOK-') || token.length !== 12 || !/^[A-Z0-9-]+$/.test(token)) {
-                showToast('Token inválido. Deve começar com "TOK-" e ter 12 caracteres alfanuméricos.', 'error');
-                return;
-            }
-            
-            // Verificar se o token existe
-            db.collection("users").doc(token).get()
-            .then(doc => {
-                if (doc.exists) {
-                    const userData = doc.data();
-                    
-                    // Salvar localmente
-                    localStorage.setItem('userToken', token);
-                    localStorage.setItem('userName', userData.name);
-                    userToken = token;
-                    userName = userData.name;
-                    
-                    tokenSetupModal.style.display = 'none';
-                    showToast('Token carregado com sucesso! Bem-vindo de volta!', 'success');
-                    loadAuctions();
-                } else {
-                    showToast('Token não encontrado. Verifique e tente novamente.', 'error');
-                }
-            })
-            .catch(error => {
-                console.error("Erro ao verificar token:", error);
-                showToast('Erro ao verificar token. Tente novamente.', 'error');
-            });
-        }
-
-        // Mostrar modal com token
-        function showTokenModal() {
-            if (userToken) {
-                tokenDisplay.textContent = userToken;
-                tokenModal.style.display = 'flex';
-            } else {
-                tokenSetupModal.style.display = 'flex';
-            }
-        }
-
-        // Copiar token
-        function copyTokenToClipboard() {
-            navigator.clipboard.writeText(userToken)
-                .then(() => {
-                    showToast('Token copiado para a área de transferência!', 'success');
-                })
-                .catch(err => {
-                    showToast('Erro ao copiar token', 'error');
-                    console.error('Erro ao copiar: ', err);
-                });
+        // Verificar token
+        if (!userToken) {
+            tokenSetupModal.style.display = 'flex';
+        } else {
+            loadAuctions();
         }
         
-        // Copiar código de compra
-        function copyCodeToClipboard(code) {
-            navigator.clipboard.writeText(code)
-                .then(() => {
-                    showToast('Código copiado para a área de transferência!', 'success');
-                })
-                .catch(err => {
-                    showToast('Erro ao copiar código', 'error');
-                    console.error('Erro ao copiar: ', err);
-                });
-        }
-
-        // Verificar status de admin
-        function checkAdminStatus(userId) {
-            return new Promise((resolve, reject) => {
-                db.collection("admins").doc(userId).get()
-                    .then(doc => {
-                        if (doc.exists) {
-                            isAdmin = true;
-                            localStorage.setItem('isAdmin', 'true');
-                            adminInfo.style.display = 'block';
-                            resolve(true);
-                        } else {
-                            isAdmin = false;
-                            localStorage.removeItem('isAdmin');
-                            resolve(false);
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Erro ao verificar status de admin:", error);
-                        reject(error);
-                    });
+        // Event listeners
+        themeToggle.addEventListener('click', toggleTheme);
+        tokenBtn.addEventListener('click', showTokenModal);
+        copyTokenBtn.addEventListener('click', copyTokenToClipboard);
+        closeTokenModal.addEventListener('click', () => {
+            tokenModal.style.display = 'none';
+        });
+        instructionsBtn.addEventListener('click', () => {
+            instructionsModal.style.display = 'flex';
+        });
+        logoutBtn.addEventListener('click', handleLogout);
+        btnLogout.addEventListener('click', handleLogout);
+        btnClosePurchase.addEventListener('click', () => {
+            purchaseModal.style.display = 'none';
+        });
+        btnCloseInstructions.addEventListener('click', () => {
+            instructionsModal.style.display = 'none';
+        });
+        
+        // Filtros
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                currentPage = 1;
+                renderAuctions();
             });
-        }
+        });
+        
+        // Admin
+        adminToggle.addEventListener('click', toggleAdminPanel);
+        saveAuctionBtn.addEventListener('click', saveAuction);
+        makeAdminBtn.addEventListener('click', makeAdmin);
+        btnLogin.addEventListener('click', handleLogin);
+        auctionIdSelect.addEventListener('change', fillAdminForm);
+        
+        // Token Setup Tabs
+        tokenSetupTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
+                
+                // Ativar tab
+                tokenSetupTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Mostrar o form correspondente
+                tokenForms.forEach(form => form.classList.remove('active'));
+                document.getElementById(`${tabName}-form`).classList.add('active');
+            });
+        });
+        
+        // Criar token
+        btnCreateToken.addEventListener('click', createNewToken);
+        
+        // Usar token existente
+        btnUseToken.addEventListener('click', useExistingToken);
+        
+        // Fechar modais ao clicar fora do conteúdo
+        document.addEventListener('click', (e) => {
+            if (e.target === instructionsModal) instructionsModal.style.display = 'none';
+            if (e.target === tokenModal) tokenModal.style.display = 'none';
+            if (e.target === tokenSetupModal) tokenSetupModal.style.display = 'none';
+            if (e.target === purchaseModal) purchaseModal.style.display = 'none';
+            if (e.target === loginModal) loginModal.style.display = 'none';
+        });
+        
+        // Fechar modais com botão de fechar
+        document.querySelectorAll('.close-modal').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.closest('.modal').style.display = 'none';
+            });
+        });
+        
+        // Adicionar evento para fechar ao sair da página
+        window.addEventListener('beforeunload', () => {
+            if (unsubscribeAuctions) unsubscribeAuctions();
+            auctionTimers.forEach(timer => clearInterval(timer));
+        });
+    });
 
-        // Tornar administrador
-        function makeAdmin() {
-            const user = auth.currentUser;
-            if (!user) {
-                loginModal.style.display = 'flex';
-                return;
+    // Função para criar novo token
+    function createNewToken() {
+        const name = userNameInput.value.trim();
+        
+        if (!name || name.length < 3) {
+            showToast('Por favor, insira um nome com pelo menos 3 caracteres', 'error');
+            return;
+        }
+        
+        // Gerar token
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let randomPart = '';
+        for (let i = 0; i < 8; i++) {
+            randomPart += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        
+        userToken = 'TOK-' + randomPart;
+        
+        // Salvar localmente
+        localStorage.setItem('userToken', userToken);
+        localStorage.setItem('userName', name);
+        userName = name;
+        
+        // Salvar no Firestore
+        db.collection("users").doc(userToken).set({
+            name: name,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        .then(() => {
+            tokenSetupModal.style.display = 'none';
+            tokenDisplay.textContent = userToken;
+            tokenModal.style.display = 'flex';
+            showToast('Token criado com sucesso!', 'success');
+            loadAuctions();
+        })
+        .catch(error => {
+            console.error("Erro ao salvar token:", error);
+            showToast('Erro ao criar token. Por favor, tente novamente.', 'error');
+        });
+    }
+
+    // Função para usar token existente
+    function useExistingToken() {
+        let token = existingTokenInput.value.trim().toUpperCase();
+        
+        // Validar formato
+        if (!token.startsWith('TOK-') || token.length !== 12 || !/^[A-Z0-9-]+$/.test(token)) {
+            showToast('Token inválido. Deve começar com "TOK-" e ter 12 caracteres alfanuméricos.', 'error');
+            return;
+        }
+        
+        // Verificar se o token existe
+        db.collection("users").doc(token).get()
+        .then(doc => {
+            if (doc.exists) {
+                const userData = doc.data();
+                
+                // Salvar localmente
+                localStorage.setItem('userToken', token);
+                localStorage.setItem('userName', userData.name);
+                userToken = token;
+                userName = userData.name;
+                
+                tokenSetupModal.style.display = 'none';
+                showToast('Token carregado com sucesso! Bem-vindo de volta!', 'success');
+                loadAuctions();
+            } else {
+                showToast('Token não encontrado. Verifique e tente novamente.', 'error');
             }
-            
-            db.collection("admins").doc(user.uid).set({})
-                .then(() => {
-                    isAdmin = true;
-                    localStorage.setItem('isAdmin', 'true');
-                    adminInfo.style.display = 'block';
-                    adminPanel.style.display = 'block';
-                    showToast('Agora você é um administrador!', 'success');
-                })
-                .catch(error => {
-                    console.error("Erro ao tornar admin:", error);
-                    showToast('Erro ao conceder acesso', 'error');
-                });
-        }
+        })
+        .catch(error => {
+            console.error("Erro ao verificar token:", error);
+            showToast('Erro ao verificar token. Tente novamente.', 'error');
+        });
+    }
 
-        // Carregar leilões
-        function loadAuctions() {
-            firebaseStatus.style.display = 'block';
-            firebaseStatus.textContent = 'Conectando ao Firebase...';
-            
-            unsubscribeAuctions = db.collection("auctions").onSnapshot(
-                snapshot => {
-                    firebaseStatus.style.display = 'none';
-                    auctions = [];
-                    
-                    if (snapshot.empty) {
-                        auctionsContainer.innerHTML = `
-                            <div class="no-auctions">
-                                <i class="fas fa-box-open"></i>
-                                <h3>Nenhum leilão disponível</h3>
-                                <p>Os administradores ainda não criaram nenhum leilão.</p>
-                            </div>
-                        `;
-                        statusText.textContent = "Nenhum leilão encontrado";
-                        return;
-                    }
-                    
-                    snapshot.forEach(doc => {
-                        auctions.push({ id: doc.id, ...doc.data() });
-                    });
-                    
-                    totalAuctions = auctions.length;
-                    renderAuctions();
-                    startTimers();
-                    updateAdminAuctionSelect();
-                },
-                error => {
-                    console.error("Erro ao carregar leilões: ", error);
-                    
-                    const errorMsg = error.code === 'permission-denied' ? 
-                        "Permissão negada. Configure as regras do Firebase" : 
-                        "Aguarde carregamento automático ou clique em atualizar.";
-
-                    firebaseStatus.textContent = errorMsg;
-                    
+    // Carregar leilões
+    function loadAuctions() {
+        firebaseStatus.style.display = 'block';
+        firebaseStatus.textContent = 'Conectando ao Firebase...';
+        
+        unsubscribeAuctions = db.collection("auctions").onSnapshot(
+            snapshot => {
+                firebaseStatus.style.display = 'none';
+                auctions = [];
+                
+                if (snapshot.empty) {
                     auctionsContainer.innerHTML = `
-                        <div class="loading-auctions">
-                            <i class="fas fa-exclamation-triangle"></i> 
-                            <p>${errorMsg}</p>
-                            <button class="btn-admin" style="margin-top: 15px;" id="retry-load">Atualizar</button>
+                        <div class="no-auctions">
+                            <i class="fas fa-box-open"></i>
+                            <h3>Nenhum leilão disponível</h3>
+                            <p>Os administradores ainda não criaram nenhum leilão.</p>
                         </div>
                     `;
-                    document.getElementById('retry-load').addEventListener('click', loadAuctions);
+                    statusText.textContent = "Nenhum leilão encontrado";
+                    return;
                 }
-            );
-        }
+                
+                snapshot.forEach(doc => {
+                    auctions.push({ id: doc.id, ...doc.data() });
+                });
+                
+                totalAuctions = auctions.length;
+                renderAuctions();
+                startTimers();
+                updateAdminAuctionSelect();
+            },
+            error => {
+                console.error("Erro ao carregar leilões: ", error);
+                
+                const errorMsg = error.code === 'permission-denied' ? 
+                    "Permissão negada. Configure as regras do Firebase" : 
+                    "Aguarde carregamento automático ou clique em atualizar.";
 
-        // Renderizar leilões com categorias e paginação
-        function renderAuctions() {
-            if (auctions.length === 0) {
+                firebaseStatus.textContent = errorMsg;
+                
                 auctionsContainer.innerHTML = `
-                    <div class="no-auctions">
-                        <i class="fas fa-box-open"></i>
-                        <h3>Nenhum leilão disponível</h3>
-                        <p>Os administradores ainda não criaram nenhum leilão.</p>
+                    <div class="loading-auctions">
+                        <i class="fas fa-exclamation-triangle"></i> 
+                        <p>${errorMsg}</p>
+                        <button class="btn-admin" style="margin-top: 15px;" id="retry-load">Atualizar</button>
                     </div>
                 `;
-                statusText.textContent = "Nenhum leilão encontrado";
-                return;
+                document.getElementById('retry-load').addEventListener('click', loadAuctions);
             }
+        );
+    }
+
+    // Renderizar leilões
+    function renderAuctions() {
+        if (auctions.length === 0) {
+            auctionsContainer.innerHTML = `
+                <div class="no-auctions">
+                    <i class="fas fa-box-open"></i>
+                    <h3>Nenhum leilão disponível</h3>
+                    <p>Os administradores ainda não criaram nenhum leilão.</p>
+                </div>
+            `;
+            statusText.textContent = "Nenhum leilão encontrado";
+            return;
+        }
+        
+        auctionsContainer.innerHTML = '';
+        
+        // Ordenar leilões
+        const sortedAuctions = [...auctions].sort((a, b) => {
+            const aEnded = isAuctionEnded(a);
+            const bEnded = isAuctionEnded(b);
             
-            auctionsContainer.innerHTML = '';
+            if (aEnded && !bEnded) return 1;
+            if (!aEnded && bEnded) return -1;
+            return b.startTime.toMillis() - a.startTime.toMillis();
+        });
+        
+        // Filtrar leilões
+        const filteredAuctions = sortedAuctions.filter(auction => {
+            if (currentFilter === 'active' && isAuctionEnded(auction)) return false;
+            if (currentFilter === 'ended' && !isAuctionEnded(auction)) return false;
+            if (currentFilter !== 'all' && currentFilter !== 'active' && currentFilter !== 'ended' && auction.category !== currentFilter) return false;
+            return true;
+        });
+        
+        totalAuctions = filteredAuctions.length;
+        const totalPages = Math.ceil(totalAuctions / auctionsPerPage);
+        
+        // Paginação
+        const startIdx = (currentPage - 1) * auctionsPerPage;
+        const paginatedAuctions = filteredAuctions.slice(startIdx, startIdx + auctionsPerPage);
+        
+        paginatedAuctions.forEach(auction => {
+            const endTime = auction.startTime.toMillis() + auction.duration;
+            const timeRemaining = endTime - Date.now();
+            const ended = timeRemaining <= 0;
             
-            // Ordenar leilões
-            const sortedAuctions = [...auctions].sort((a, b) => {
-                const aEnded = isAuctionEnded(a);
-                const bEnded = isAuctionEnded(b);
-                
-                if (aEnded && !bEnded) return 1;
-                if (!aEnded && bEnded) return -1;
-                return b.startTime.toMillis() - a.startTime.toMillis();
-            });
+            const isHighestBidder = auction.highestBidder && auction.highestBidder.id === userToken;
+            const isWinner = auction.winnerId && auction.winnerId === userToken;
+            const canGenerateCode = ended && isHighestBidder && !auction.code;
+            const showWinnerSection = ended && isWinner && auction.code;
             
-            // Filtrar leilões
-            const filteredAuctions = sortedAuctions.filter(auction => {
-                if (currentFilter === 'active' && isAuctionEnded(auction)) return false;
-                if (currentFilter === 'ended' && !isAuctionEnded(auction)) return false;
-                if (currentFilter !== 'all' && currentFilter !== 'active' && currentFilter !== 'ended' && auction.category !== currentFilter) return false;
-                return true;
-            });
+            const categoryClass = auction.category ? 
+                `category-${auction.category.toLowerCase().replace(/ /g, '-')}` : 
+                '';
             
-            totalAuctions = filteredAuctions.length;
-            const totalPages = Math.ceil(totalAuctions / auctionsPerPage);
-            
-            // Paginação
-            const startIdx = (currentPage - 1) * auctionsPerPage;
-            const paginatedAuctions = filteredAuctions.slice(startIdx, startIdx + auctionsPerPage);
-            
-            paginatedAuctions.forEach(auction => {
-                const endTime = auction.startTime.toMillis() + auction.duration;
-                const timeRemaining = endTime - Date.now();
-                const ended = timeRemaining <= 0;
-                
-                const isHighestBidder = auction.highestBidder && auction.highestBidder.id === userToken;
-                const isWinner = auction.winnerId && auction.winnerId === userToken;
-                const canGenerateCode = ended && isHighestBidder && !auction.code;
-                const showWinnerSection = ended && isWinner && auction.code;
-                
-                const categoryClass = auction.category ? 
-                    `category-${auction.category.toLowerCase().replace(/ /g, '-')}` : 
-                    '';
-                
-                const card = document.createElement('div');
-                card.className = 'auction-card';
-                card.dataset.id = auction.id;
-                card.innerHTML = `
-                    <div class="auction-image">
-                        ${auction.image ? 
-                            `<img src="${auction.image}" alt="${auction.title}" 
-                                onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-cube\'></i></div>'">` : 
-                            `<div class="image-placeholder"><i class="fas fa-cube"></i></div>`
-                        }
-                        ${auction.category ? `<div class="category-tag ${categoryClass}">${auction.category}</div>` : ''}
-                        <div class="time-remaining">
-                            <span class="countdown" id="countdown-${auction.id}">${formatTime(timeRemaining)}</span>
-                        </div>
+            const card = document.createElement('div');
+            card.className = 'auction-card';
+            card.dataset.id = auction.id;
+            card.innerHTML = `
+                <div class="auction-image">
+                    ${auction.image ? 
+                        `<img src="${auction.image}" alt="${auction.title}" 
+                            onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\'image-placeholder\'><i class=\'fas fa-cube\'></i></div>'">` : 
+                        `<div class="image-placeholder"><i class="fas fa-cube"></i></div>`
+                    }
+                    ${auction.category ? `<div class="category-tag ${categoryClass}">${auction.category}</div>` : ''}
+                    <div class="time-remaining">
+                        <span class="countdown" id="countdown-${auction.id}">${formatTime(timeRemaining)}</span>
                     </div>
-                    <div class="card-content">
-                        <h3 class="card-title">${auction.title}</h3>
-                        <p class="card-description">${auction.description}</p>
-                        <div class="bid-section">
-                            <div class="current-bid">
-                                <span class="bid-label">Lance atual:</span>
-                                <span class="bid-amount">R$ ${auction.currentBid.toFixed(2)}</span>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">${auction.title}</h3>
+                    <p class="card-description">${auction.description}</p>
+                    <div class="bid-section">
+                        <div class="current-bid">
+                            <span class="bid-label">Lance atual:</span>
+                            <span class="bid-amount">R$ ${auction.currentBid.toFixed(2)}</span>
+                            ${auction.highestBidder ? 
+                                `<div class="bidder-name">
+                                    por ${auction.highestBidder.name}
+                                    ${isHighestBidder ? `<span class="winner-badge">Você!</span>` : ''}
+                                </div>` : 
+                                ''
+                            }
+                        </div>
+                        
+                        ${ended ? `
+                            <div class="auction-ended" id="ended-${auction.id}">
+                                LEILÃO FINALIZADO
                                 ${auction.highestBidder ? 
-                                    `<div class="bidder-name">
-                                        por ${auction.highestBidder.name}
-                                        ${isHighestBidder ? `<span class="winner-badge">Você!</span>` : ''}
-                                    </div>` : 
-                                    ''
+                                    `<div style="margin-top: 5px; font-size: 0.9rem;">
+                                        Vencedor: ${auction.highestBidder.name}
+                                    </div>` : ''
                                 }
                             </div>
-                            
-                            ${ended ? `
-                                <div class="auction-ended" id="ended-${auction.id}">
-                                    LEILÃO FINALIZADO
-                                    ${auction.highestBidder ? 
-                                        `<div style="margin-top: 5px; font-size: 0.9rem;">
-                                            Vencedor: ${auction.highestBidder.name}
-                                        </div>` : ''
-                                    }
-                                </div>
-                            ` : `
-                                <form class="bid-form" data-id="${auction.id}">
-                                    <input type="number" class="bid-input" 
-                                           min="${auction.currentBid + 1}" 
-                                           step="0.01" 
-                                           placeholder="R$ ${(auction.currentBid + 1).toFixed(2)} ou mais" 
-                                           required>
-                                    <button type="submit" class="btn-bid">Dar Lance</button>
-                                </form>
-                            `}
-                            
-                            ${canGenerateCode ? `
-                                <button class="btn-code" data-id="${auction.id}">
-                                    Gerar Código de Compra
-                                </button>
-                            ` : ''}
-                            
-                            <!-- SEÇÃO DO VENCEDOR CORRIGIDA -->
-                            ${showWinnerSection ? `
-                                <div class="winner-section" id="winner-section-${auction.id}">
-                                    <h4><i class="fas fa-crown"></i> Parabéns, você venceu este leilão!</h4>
-                                    <div class="code-generated">
-                                        <span class="code-label">Seu código de compra:</span>
-                                        <span class="code-value">${auction.code}</span>
-                                    </div>
-                                    <p class="code-info">
-                                        Clique no código para copiar ou use o botão abaixo para finalizar a compra.
-                                    </p>
-                                    <button class="btn-purchase" id="purchase-btn-${auction.id}" data-id="${auction.id}">
-                                        <i class="fas fa-shopping-cart"></i> Finalizar Compra
-                                    </button>
-                                </div>
-                            ` : ''}
-                            
-                            ${auction.bidHistory && auction.bidHistory.length > 0 ? `
-                                <div class="bid-history">
-                                    <strong>Histórico de Lances:</strong>
-                                    ${auction.bidHistory.slice().reverse().map(bid => `
-                                        <div class="bid-history-item">
-                                            <span class="bid-history-name">
-                                                ${bid.name} 
-                                                ${bid.id === userToken ? '<span class="winner-badge">Você</span>' : ''}
-                                            </span>
-                                            <span class="bid-history-amount">R$ ${bid.amount.toFixed(2)}</span>
-                                            <span class="bid-history-time">${formatTimeShort(bid.timestamp)}</span>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            ` : ''}
-                        </div>
-                    </div>
-                `;
-                auctionsContainer.appendChild(card);
-                
-                // Adicionar eventos
-                if (!ended) {
-                    const form = card.querySelector('.bid-form');
-                    form && form.addEventListener('submit', (e) => handleBid(e, auction.id));
-                }
-                
-                if (canGenerateCode) {
-                    const btn = card.querySelector('.btn-code');
-                    btn && btn.addEventListener('click', () => generateCode(auction.id));
-                }
-                
-                // Mostrar seções se necessário
-                if (ended) {
-                    const endedEl = card.querySelector('.auction-ended');
-                    endedEl && (endedEl.style.display = 'block');
-                }
-            });
-            
-            // Adicionar controles de paginação
-            if (totalPages > 1) {
-                const paginationDiv = document.createElement('div');
-                paginationDiv.className = 'pagination-controls';
-                paginationDiv.innerHTML = `
-                    <button class="btn-pagination" id="prev-page" ${currentPage === 1 ? 'disabled' : ''}>
-                        <i class="fas fa-arrow-left"></i> Anterior
-                    </button>
-                    <span class="page-info">Página ${currentPage} de ${totalPages}</span>
-                    <button class="btn-pagination" id="next-page" ${currentPage === totalPages ? 'disabled' : ''}>
-                        Próxima <i class="fas fa-arrow-right"></i>
-                    </button>
-                `;
-                auctionsContainer.appendChild(paginationDiv);
-                
-                document.getElementById('prev-page').addEventListener('click', () => {
-                    currentPage--;
-                    renderAuctions();
-                });
-                
-                document.getElementById('next-page').addEventListener('click', () => {
-                    currentPage++;
-                    renderAuctions();
-                });
-            }
-            
-            updateStatusBar();
-        }
-
-        // Verificar se o leilão terminou
-        function isAuctionEnded(auction) {
-            const endTime = auction.startTime.toMillis() + auction.duration;
-            return endTime <= Date.now();
-        }
-
-        // Atualizar contadores de tempo
-        function startTimers() {
-            // Limpar timers anteriores
-            if (window.auctionTimers) {
-                window.auctionTimers.forEach(timer => clearInterval(timer));
-            }
-            
-            window.auctionTimers = [];
-            
-            auctions.forEach(auction => {
-                const timer = setInterval(() => {
-                    const endTime = auction.startTime.toMillis() + auction.duration;
-                    const timeRemaining = endTime - Date.now();
-                    
-                    const countdownEl = document.getElementById(`countdown-${auction.id}`);
-                    if (countdownEl) {
-                        countdownEl.textContent = formatTime(timeRemaining);
+                        ` : `
+                            <form class="bid-form" data-id="${auction.id}">
+                                <input type="number" class="bid-input" 
+                                       min="${auction.currentBid + 1}" 
+                                       step="0.01" 
+                                       placeholder="R$ ${(auction.currentBid + 1).toFixed(2)} ou mais" 
+                                       required>
+                                <button type="submit" class="btn-bid">Dar Lance</button>
+                            </form>
+                        `}
                         
-                        // Atualizar estado do leilão
-                        if (timeRemaining <= 0) {
-                            clearInterval(timer);
-                            renderAuctions();
-                        }
-                    }
-                }, 1000);
-                
-                window.auctionTimers.push(timer);
-            });
-        }
-
-        // Formatar tempo restante
-        function formatTime(ms) {
-            if (ms <= 0) return '00:00:00';
+                        ${canGenerateCode ? `
+                            <button class="btn-bid" style="background-color: var(--info); width: 100%;" data-id="${auction.id}">
+                                <i class="fas fa-barcode"></i> Gerar Código
+                            </button>
+                        ` : ''}
+                        
+                        ${showWinnerSection ? `
+                            <div class="winner-section" id="winner-section-${auction.id}">
+                                <h4><i class="fas fa-crown"></i> Parabéns, você venceu!</h4>
+                                <div class="code-generated">
+                                    <span class="code-label">Seu código:</span>
+                                    <span class="code-value">${auction.code}</span>
+                                </div>
+                                <button class="btn-purchase" data-id="${auction.id}">
+                                    <i class="fas fa-shopping-cart"></i> Finalizar Compra
+                                </button>
+                            </div>
+                        ` : ''}
+                        
+                        ${auction.bidHistory && auction.bidHistory.length > 0 ? `
+                            <div class="bid-history">
+                                <strong>Histórico de Lances:</strong>
+                                ${auction.bidHistory.slice().reverse().map(bid => `
+                                    <div class="bid-history-item">
+                                        <span class="bid-history-name">
+                                            ${bid.name} 
+                                            ${bid.id === userToken ? '<span class="winner-badge">Você</span>' : ''}
+                                        </span>
+                                        <span class="bid-history-amount">R$ ${bid.amount.toFixed(2)}</span>
+                                        <span class="bid-history-time">${formatTimeShort(bid.timestamp)}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+            auctionsContainer.appendChild(card);
             
-            const sec = Math.floor(ms / 1000) % 60;
-            const min = Math.floor(ms / (1000 * 60)) % 60;
-            const hrs = Math.floor(ms / (1000 * 60 * 60));
+            // Adicionar eventos
+            if (!ended) {
+                const form = card.querySelector('.bid-form');
+                form && form.addEventListener('submit', (e) => handleBid(e, auction.id));
+            }
             
-            return `${hrs.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-        }
+            if (canGenerateCode) {
+                const btn = card.querySelector('.btn-bid');
+                btn && btn.addEventListener('click', () => generateCode(auction.id));
+            }
+            
+            if (showWinnerSection) {
+                const btn = card.querySelector('.btn-purchase');
+                btn && btn.addEventListener('click', () => showPurchaseModal(auction));
+            }
+        });
         
-        // Formatar tempo curto para histórico
-        function formatTimeShort(timestamp) {
-            const date = new Date(timestamp);
-            return date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        }
-
-        // Manipular lance
-        function handleBid(e, auctionId) {
-            e.preventDefault();
-            const form = e.target;
-            const bidInput = form.querySelector('.bid-input');
-            const bidValue = parseFloat(bidInput.value);
-            
-            const auction = auctions.find(a => a.id === auctionId);
-            if (!auction) {
-                showToast('Leilão não encontrado. Recarregue a página e tente novamente.', 'error');
-                return;
-            }
-            
-            if (isNaN(bidValue)) {
-                showToast('Valor inválido. Digite um número válido.', 'error');
-                return;
-            }
-            
-            if (bidValue <= auction.currentBid) {
-                showToast(`Lance deve ser maior que R$ ${auction.currentBid.toFixed(2)}`, 'error');
-                return;
-            }
-            
-            if (!userToken) {
-                tokenSetupModal.style.display = 'flex';
-                showToast('Você precisa configurar um token para dar lances', 'error');
-                return;
-            }
-            
-            const auctionRef = db.collection("auctions").doc(auctionId);
-            
-            const newBid = {
-                id: userToken.toUpperCase(),
-                name: userName,
-                amount: bidValue,
-                timestamp: Date.now()
-            };
-            
-            auctionRef.update({
-                currentBid: bidValue,
-                highestBidder: {
-                    id: userToken.toUpperCase(),
-                    name: userName
-                },
-                bidHistory: firebase.firestore.FieldValue.arrayUnion(newBid)
-            })
-            .then(() => {
-                showToast(`Lance de R$ ${bidValue.toFixed(2)} registrado!`, 'success');
-                bidInput.value = '';
-            })
-            .catch(error => {
-                console.error("Erro detalhado ao dar lance:", error);
-                
-                let message = 'Erro ao dar lance';
-                if (error.code === 'permission-denied') {
-                    message = 'Token inválido ou permissão negada';
-                } else if (error.message.includes('token')) {
-                    message = 'Problema com seu token. Tente configurar novamente';
-                }
-                
-                showToast(`${message}. Tente novamente.`, 'error');
-            });
-        }
-
-        // Gerar código de compra
-        function generateCode(auctionId) {
-            const auction = auctions.find(a => a.id === auctionId);
-            if (!auction) return;
-            
-            // Verificar se o usuário é o vencedor
-            if (!auction.highestBidder || auction.highestBidder.id !== userToken) {
-                showToast('Apenas o vencedor pode gerar o código', 'error');
-                return;
-            }
-            
-            // Verificar se o leilão terminou
-            const endTime = auction.startTime.toMillis() + auction.duration;
-            if (endTime > Date.now()) {
-                showToast('O leilão ainda não terminou', 'error');
-                return;
-            }
-            
-            // Verificar se o código já foi gerado
-            if (auction.code) {
-                showToast('Código já gerado para este leilão', 'error');
-                return;
-            }
-            
-            const code = 'MINI-' + auctionId + '-' + Math.random().toString(36).substr(2, 8).toUpperCase();
-            
-            // Atualizar no Firestore
-            db.collection("auctions").doc(auctionId).update({
-                code: code,
-                winnerId: userToken.toUpperCase(),
-                highestBidder: auction.highestBidder
-            })
-            .then(() => {
-                showToast('Código gerado com sucesso!', 'success');
-                
-                // Atualiza o leilão localmente
-                const auctionIndex = auctions.findIndex(a => a.id === auctionId);
-                if (auctionIndex !== -1) {
-                    auctions[auctionIndex].code = code;
-                    auctions[auctionIndex].winnerId = userToken.toUpperCase();
-                    
-                    // Força a atualização do card
-                    renderAuctions();
-                }
-            })
-            .catch(error => {
-                console.error("Erro ao gerar código: ", error);
-                
-                let message = 'Erro ao gerar código';
-                if (error.code === 'permission-denied') {
-                    message = 'Permissão negada. Verifique seu token';
-                } else if (error.message.includes('token')) {
-                    message = 'Token inválido. Tente configurar novamente';
-                }
-                
-                showToast(`${message}. Tente novamente.`, 'error');
-            });
-        }
-
-        // Atualizar barra de status
-        function updateStatusBar() {
-            const active = auctions.filter(a => !isAuctionEnded(a)).length;
-            const ended = auctions.filter(a => isAuctionEnded(a)).length;
-            
-            let text = '';
-            switch(currentFilter) {
-                case 'all': text = `${auctions.length} leilões (${active} ativos, ${ended} finalizados)`; break;
-                case 'active': text = `${active} leilões ativos`; break;
-                case 'ended': text = `${ended} leilões finalizados`; break;
-                default: text = `${auctions.filter(a => a.category === currentFilter).length} leilões na categoria ${currentFilter}`;
-            }
-            
-            statusText.textContent = text;
-        }
-
-        // Alternar tema
-        function toggleTheme() {
-            document.body.classList.toggle('dark-theme');
-            currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
-            themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-            localStorage.setItem('theme', currentTheme);
-        }
-
-        // Mostrar notificação toast
-        function showToast(message, type) {
-            const existing = document.querySelector('.toast');
-            if (existing) existing.remove();
-            
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            
-            toast.innerHTML = `
-                <i class="fas ${type === 'success' ? 'fa-check' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
-                <span class="toast-message">${message}</span>
-                ${type === 'error' ? '<a href="#" class="toast-details">[detalhes]</a>' : ''}
+        // Adicionar controles de paginação
+        paginationControls.innerHTML = '';
+        if (totalPages > 1) {
+            paginationControls.innerHTML = `
+                <button class="btn-pagination" id="prev-page" ${currentPage === 1 ? 'disabled' : ''}>
+                    <i class="fas fa-arrow-left"></i> Anterior
+                </button>
+                <span class="page-info">Página ${currentPage} de ${totalPages}</span>
+                <button class="btn-pagination" id="next-page" ${currentPage === totalPages ? 'disabled' : ''}>
+                    Próxima <i class="fas fa-arrow-right"></i>
+                </button>
             `;
             
-            document.body.appendChild(toast);
+            document.getElementById('prev-page')?.addEventListener('click', () => {
+                currentPage--;
+                renderAuctions();
+            });
             
-            if (type === 'error') {
-                toast.querySelector('.toast-details').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    console.error('Detalhes do erro:', message);
-                });
-            }
-            
-            setTimeout(() => toast.remove(), 3000);
-        }
-
-        // Fechar modal de instruções
-        function closeInstructionsModal() {
-            instructionsModal.style.display = 'none';
+            document.getElementById('next-page')?.addEventListener('click', () => {
+                currentPage++;
+                renderAuctions();
+            });
         }
         
-        // Alternar painel admin
-        function toggleAdminPanel() {
-            const user = auth.currentUser;
-            
-            if (!user) {
-                loginModal.style.display = 'flex';
-                showToast('Faça login como administrador', 'info');
-                return;
-            }
-            
-            checkAdminStatus(user.uid).then(isAdminUser => {
-                if (isAdminUser) {
-                    adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' : 'block';
-                } else {
-                    showToast('Você não tem permissões de administrador', 'error');
-                    const retry = confirm("Você não tem permissão de administrador. Deseja tentar novamente?");
-                    if (retry) {
-                        loginModal.style.display = 'flex';
+        updateStatusBar();
+    }
+
+    // Verificar se o leilão terminou
+    function isAuctionEnded(auction) {
+        const endTime = auction.startTime.toMillis() + auction.duration;
+        return endTime <= Date.now();
+    }
+
+    // Atualizar contadores de tempo
+    function startTimers() {
+        // Limpar timers anteriores
+        auctionTimers.forEach(timer => clearInterval(timer));
+        auctionTimers = [];
+        
+        auctions.forEach(auction => {
+            const timer = setInterval(() => {
+                const endTime = auction.startTime.toMillis() + auction.duration;
+                const timeRemaining = endTime - Date.now();
+                
+                const countdownEl = document.getElementById(`countdown-${auction.id}`);
+                if (countdownEl) {
+                    countdownEl.textContent = formatTime(timeRemaining);
+                    
+                    // Atualizar estado do leilão
+                    if (timeRemaining <= 0) {
+                        clearInterval(timer);
+                        renderAuctions();
                     }
                 }
-            });
-        }
-        
-        // Atualizar select de leilões no admin
-        function updateAdminAuctionSelect() {
-            auctionIdSelect.innerHTML = '<option value="new">Novo Leilão</option>';
+            }, 1000);
             
-            auctions.forEach(auction => {
-                const option = document.createElement('option');
-                option.value = auction.id;
-                option.textContent = `#${auction.id} - ${auction.title}`;
-                auctionIdSelect.appendChild(option);
-            });
+            auctionTimers.push(timer);
+        });
+    }
+
+    // Formatar tempo restante
+    function formatTime(ms) {
+        if (ms <= 0) return '00:00:00';
+        
+        const sec = Math.floor(ms / 1000) % 60;
+        const min = Math.floor(ms / (1000 * 60)) % 60;
+        const hrs = Math.floor(ms / (1000 * 60 * 60));
+        
+        return `${hrs.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+    }
+    
+    // Formatar tempo curto para histórico
+    function formatTimeShort(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    }
+
+    // Manipular lance
+    function handleBid(e, auctionId) {
+        e.preventDefault();
+        const form = e.target;
+        const bidInput = form.querySelector('.bid-input');
+        const bidValue = parseFloat(bidInput.value);
+        
+        const auction = auctions.find(a => a.id === auctionId);
+        if (!auction) {
+            showToast('Leilão não encontrado. Recarregue a página e tente novamente.', 'error');
+            return;
         }
         
-        // Preencher formulário ao selecionar leilão existente
-        function fillAdminForm() {
-            const auctionId = auctionIdSelect.value;
-            if (auctionId === 'new') {
+        if (isNaN(bidValue)) {
+            showToast('Valor inválido. Digite um número válido.', 'error');
+            return;
+        }
+        
+        if (bidValue <= auction.currentBid) {
+            showToast(`Lance deve ser maior que R$ ${auction.currentBid.toFixed(2)}`, 'error');
+            return;
+        }
+        
+        if (!userToken) {
+            showToast('Você precisa configurar um token para dar lances', 'error');
+            tokenSetupModal.style.display = 'flex';
+            return;
+        }
+        
+        const auctionRef = db.collection("auctions").doc(auctionId);
+        
+        const newBid = {
+            id: userToken.toUpperCase(),
+            name: userName,
+            amount: bidValue,
+            timestamp: Date.now()
+        };
+        
+        auctionRef.update({
+            currentBid: bidValue,
+            highestBidder: {
+                id: userToken.toUpperCase(),
+                name: userName
+            },
+            bidHistory: firebase.firestore.FieldValue.arrayUnion(newBid)
+        })
+        .then(() => {
+            showToast(`Lance de R$ ${bidValue.toFixed(2)} registrado!`, 'success');
+            bidInput.value = '';
+        })
+        .catch(error => {
+            console.error("Erro ao dar lance:", error);
+            showToast('Erro ao dar lance. Tente novamente.', 'error');
+        });
+    }
+
+    // Gerar código de compra
+    function generateCode(auctionId) {
+        const auction = auctions.find(a => a.id === auctionId);
+        if (!auction) return;
+        
+        // Verificar se o usuário é o vencedor
+        if (!auction.highestBidder || auction.highestBidder.id !== userToken) {
+            showToast('Apenas o vencedor pode gerar o código', 'error');
+            return;
+        }
+        
+        // Verificar se o leilão terminou
+        const endTime = auction.startTime.toMillis() + auction.duration;
+        if (endTime > Date.now()) {
+            showToast('O leilão ainda não terminou', 'error');
+            return;
+        }
+        
+        // Verificar se o código já foi gerado
+        if (auction.code) {
+            showToast('Código já gerado para este leilão', 'error');
+            return;
+        }
+        
+        const code = 'MINI-' + auctionId + '-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+        
+        // Atualizar no Firestore
+        db.collection("auctions").doc(auctionId).update({
+            code: code,
+            winnerId: userToken.toUpperCase(),
+            highestBidder: auction.highestBidder
+        })
+        .then(() => {
+            showToast('Código gerado com sucesso!', 'success');
+            
+            // Atualiza o leilão localmente
+            const auctionIndex = auctions.findIndex(a => a.id === auctionId);
+            if (auctionIndex !== -1) {
+                auctions[auctionIndex].code = code;
+                auctions[auctionIndex].winnerId = userToken.toUpperCase();
+                
+                // Força a atualização do card
+                renderAuctions();
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao gerar código: ", error);
+            showToast('Erro ao gerar código. Tente novamente.', 'error');
+        });
+    }
+
+    // Atualizar barra de status
+    function updateStatusBar() {
+        const active = auctions.filter(a => !isAuctionEnded(a)).length;
+        const ended = auctions.filter(a => isAuctionEnded(a)).length;
+        
+        let text = '';
+        switch(currentFilter) {
+            case 'all': text = `${auctions.length} leilões (${active} ativos, ${ended} finalizados)`; break;
+            case 'active': text = `${active} leilões ativos`; break;
+            case 'ended': text = `${ended} leilões finalizados`; break;
+            default: text = `${auctions.filter(a => a.category === currentFilter).length} leilões na categoria ${currentFilter}`;
+        }
+        
+        statusText.textContent = text;
+    }
+
+    // Alternar tema
+    function toggleTheme() {
+        document.body.classList.toggle('dark-theme');
+        currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+        themeToggle.innerHTML = currentTheme === 'dark' ? '<span class="theme-icon">☀️</span>' : '<span class="theme-icon">🌙</span>';
+        localStorage.setItem('theme', currentTheme);
+    }
+
+    // Mostrar notificação toast
+    function showToast(message, type) {
+        const existing = document.querySelector('.toast');
+        if (existing) existing.remove();
+        
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.style = `
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 20px;
+            border-radius: 6px;
+            background-color: ${type === 'success' ? 'var(--success)' : 'var(--danger)'};
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10000;
+        `;
+        toast.textContent = message;
+        
+        document.body.appendChild(toast);
+        
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    // Verificar status de admin
+    function checkAdminStatus(userId) {
+        return new Promise((resolve, reject) => {
+            db.collection("admins").doc(userId).get()
+                .then(doc => {
+                    if (doc.exists) {
+                        isAdmin = true;
+                        localStorage.setItem('isAdmin', 'true');
+                        adminInfo.style.display = 'block';
+                        resolve(true);
+                    } else {
+                        isAdmin = false;
+                        localStorage.removeItem('isAdmin');
+                        resolve(false);
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro ao verificar status de admin:", error);
+                    reject(error);
+                });
+        });
+    }
+
+    // Tornar administrador
+    function makeAdmin() {
+        const user = auth.currentUser;
+        if (!user) {
+            loginModal.style.display = 'flex';
+            return;
+        }
+        
+        db.collection("admins").doc(user.uid).set({})
+            .then(() => {
+                isAdmin = true;
+                localStorage.setItem('isAdmin', 'true');
+                adminInfo.style.display = 'block';
+                adminPanel.style.display = 'block';
+                showToast('Agora você é um administrador!', 'success');
+            })
+            .catch(error => {
+                console.error("Erro ao tornar admin:", error);
+                showToast('Erro ao conceder acesso', 'error');
+            });
+    }
+
+    // Alternar painel admin
+    function toggleAdminPanel() {
+        const user = auth.currentUser;
+        
+        if (!user) {
+            loginModal.style.display = 'flex';
+            showToast('Faça login como administrador', 'info');
+            return;
+        }
+        
+        checkAdminStatus(user.uid).then(isAdminUser => {
+            if (isAdminUser) {
+                adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' : 'block';
+            } else {
+                showToast('Você não tem permissões de administrador', 'error');
+            }
+        });
+    }
+    
+    // Atualizar select de leilões no admin
+    function updateAdminAuctionSelect() {
+        auctionIdSelect.innerHTML = '<option value="new">Novo Leilão</option>';
+        
+        auctions.forEach(auction => {
+            const option = document.createElement('option');
+            option.value = auction.id;
+            option.textContent = `#${auction.id} - ${auction.title}`;
+            auctionIdSelect.appendChild(option);
+        });
+    }
+    
+    // Preencher formulário ao selecionar leilão existente
+    function fillAdminForm() {
+        const auctionId = auctionIdSelect.value;
+        if (auctionId === 'new') {
+            resetAdminForm();
+            return;
+        }
+        
+        const auction = auctions.find(a => a.id === auctionId);
+        if (auction) {
+            document.getElementById('auction-title').value = auction.title || '';
+            document.getElementById('auction-description').value = auction.description || '';
+            document.getElementById('auction-category').value = auction.category || '';
+            
+            // Converter milissegundos para minutos
+            const minutes = Math.floor(auction.duration / (1000 * 60));
+            document.getElementById('auction-duration').value = minutes || 60;
+            
+            document.getElementById('auction-start-bid').value = auction.currentBid || '';
+            document.getElementById('auction-image').value = auction.image || '';
+        }
+    }
+    
+    // Salvar leilão (admin)
+    function saveAuction() {
+        if (!isAdmin) {
+            showToast('Acesso não autorizado', 'error');
+            return;
+        }
+        
+        const id = auctionIdSelect.value;
+        const title = document.getElementById('auction-title').value;
+        const description = document.getElementById('auction-description').value;
+        const category = document.getElementById('auction-category').value;
+        
+        // Alteração principal: duração em minutos
+        const durationMinutes = parseInt(document.getElementById('auction-duration').value);
+        const startBid = parseFloat(document.getElementById('auction-start-bid').value);
+        const image = document.getElementById('auction-image').value;
+        
+        if (durationMinutes < 1) {
+            showToast('A duração deve ser de pelo menos 1 minuto', 'error');
+            return;
+        }
+        
+        if (startBid <= 0) {
+            showToast('O lance inicial deve ser maior que zero', 'error');
+            return;
+        }
+        
+        // Converter minutos para milissegundos
+        const durationMs = durationMinutes * 60 * 1000;
+        
+        const auctionData = {
+            title,
+            description,
+            category,
+            duration: durationMs,
+            currentBid: startBid,
+            highestBidder: null,
+            ended: false,
+            code: null,
+            winnerId: null,
+            bidHistory: [],
+            image,
+            startTime: firebase.firestore.FieldValue.serverTimestamp()
+        };
+        
+        if (id === 'new') {
+            db.collection("auctions").add(auctionData)
+            .then(() => {
+                showToast('Leilão criado com sucesso!', 'success');
                 resetAdminForm();
-                return;
-            }
-            
-            const auction = auctions.find(a => a.id === auctionId);
-            if (auction) {
-                document.getElementById('auction-title').value = auction.title || '';
-                document.getElementById('auction-description').value = auction.description || '';
-                document.getElementById('auction-category').value = auction.category || '';
-                
-                // Converter milissegundos para minutos
-                const minutes = Math.floor(auction.duration / (1000 * 60));
-                document.getElementById('auction-duration').value = minutes || 60;
-                
-                document.getElementById('auction-start-bid').value = auction.currentBid || '';
-                document.getElementById('auction-image').value = auction.image || '';
-            }
-        }
-        
-        // Salvar leilão (admin) com duração em minutos
-        function saveAuction() {
-            if (!isAdmin) {
-                showToast('Acesso não autorizado', 'error');
-                return;
-            }
-            
-            const id = auctionIdSelect.value;
-            const title = document.getElementById('auction-title').value;
-            const description = document.getElementById('auction-description').value;
-            const category = document.getElementById('auction-category').value;
-            
-            // Alteração principal: duração em minutos
-            const durationMinutes = parseInt(document.getElementById('auction-duration').value);
-            const startBid = parseFloat(document.getElementById('auction-start-bid').value);
-            const image = document.getElementById('auction-image').value;
-            
-            if (durationMinutes < 1) {
-                showToast('A duração deve ser de pelo menos 1 minuto', 'error');
-                return;
-            }
-            
-            if (startBid <= 0) {
-                showToast('O lance inicial deve ser maior que zero', 'error');
-                return;
-            }
-            
-            // Converter minutos para milissegundos
-            const durationMs = durationMinutes * 60 * 1000;
-            
-            const auctionData = {
+            })
+            .catch(error => {
+                console.error("Erro ao criar leilão: ", error);
+                showToast('Erro ao criar leilão', 'error');
+            });
+        } else {
+            db.collection("auctions").doc(id).update({
                 title,
                 description,
                 category,
                 duration: durationMs,
-                currentBid: startBid,
-                highestBidder: null,
-                ended: false,
-                code: null,
-                winnerId: null,
-                bidHistory: [],
-                image,
-                startTime: firebase.firestore.Timestamp.fromDate(new Date())
-            };
-            
-            if (id === 'new') {
-                db.collection("auctions").add(auctionData)
-                .then(() => {
-                    showToast('Leilão criado com sucesso!', 'success');
-                    resetAdminForm();
-                })
-                .catch(error => {
-                    console.error("Erro ao criar leilão: ", error);
-                    showToast('Erro ao criar leilão', 'error');
-                });
-            } else {
-                db.collection("auctions").doc(id).update({
-                    title,
-                    description,
-                    category,
-                    duration: durationMs,
-                    image
-                })
-                .then(() => {
-                    showToast('Leilão atualizado com sucesso!', 'success');
-                    resetAdminForm();
-                })
-                .catch(error => {
-                    console.error("Erro ao atualizar leilão: ", error);
-                    showToast('Erro ao atualizar leilão', 'error');
-                });
-            }
-        }
-        
-        // Resetar formulário admin
-        function resetAdminForm() {
-            auctionIdSelect.value = 'new';
-            document.getElementById('auction-title').value = '';
-            document.getElementById('auction-description').value = '';
-            document.getElementById('auction-category').value = '';
-            document.getElementById('auction-duration').value = '60'; // 60 minutos padrão
-            document.getElementById('auction-start-bid').value = '';
-            document.getElementById('auction-image').value = '';
-        }
-        
-        // Lidar com login admin
-        function handleLogin() {
-            const email = adminEmailInput.value;
-            const password = adminPasswordInput.value;
-            
-            if (!email || !password) {
-                loginError.textContent = "Por favor, preencha todos os campos";
-                loginError.style.display = 'block';
-                return;
-            }
-            
-            auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    
-                    db.collection("users").doc(user.uid).set({
-                        email: user.email,
-                        name: "Administrador",
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                    }, { merge: true });
-                    
-                    checkAdminStatus(user.uid).then(isAdminUser => {
-                        loginModal.style.display = 'none';
-                        adminEmailInput.value = '';
-                        adminPasswordInput.value = '';
-                        loginError.style.display = 'none';
-                        
-                        if (isAdminUser) {
-                            adminInfo.style.display = 'block';
-                            adminPanel.style.display = 'block';
-                            showToast('Acesso administrativo concedido', 'success');
-                        } else {
-                            showToast('Login realizado, mas você não é administrador', 'info');
-                            const retry = confirm("Você não tem permissão de administrador. Deseja tentar novamente?");
-                            if (retry) {
-                                loginModal.style.display = 'flex';
-                            }
-                        }
-                    });
-                })
-                .catch((error) => {
-                    console.error("Erro de login: ", error);
-                    
-                    let errorMessage = "Erro ao fazer login. ";
-                    
-                    switch(error.code) {
-                        case "auth/invalid-email":
-                            errorMessage = "E-mail inválido. Verifique seu e-mail.";
-                            break;
-                        case "auth/user-disabled":
-                            errorMessage = "Conta desativada. Contate o suporte.";
-                            break;
-                        case "auth/user-not-found":
-                            errorMessage = "Usuário não encontrado. Verifique o e-mail digitado.";
-                            break;
-                        case "auth/wrong-password":
-                            errorMessage = "Senha incorreta. Tente novamente.";
-                            break;
-                        case "auth/too-many-requests":
-                            errorMessage = "Muitas tentativas. Tente novamente mais tarde.";
-                            break;
-                        default:
-                            errorMessage = "Ocorreu um erro. Tente novamente.";
-                    }
-                    
-                    loginError.textContent = errorMessage;
-                    loginError.style.display = 'block';
-                    
-                    if (error.code === "auth/user-not-found") {
-                        loginError.innerHTML += `<br><br>Deseja <a href="#" id="create-account">criar uma conta</a>?`;
-                        document.getElementById('create-account').addEventListener('click', createAdminAccount);
-                    }
-                });
-        }
-        
-        // Criar conta administrativa
-        function createAdminAccount() {
-            const email = adminEmailInput.value;
-            const password = adminPasswordInput.value;
-            
-            if (!email || !password) {
-                loginError.textContent = "Por favor, preencha todos os campos";
-                return;
-            }
-            
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    
-                    db.collection("admins").doc(user.uid).set({})
-                    .then(() => {
-                        isAdmin = true;
-                        localStorage.setItem('isAdmin', 'true');
-                        adminInfo.style.display = 'block';
-                        loginModal.style.display = 'none';
-                        adminPanel.style.display = 'block';
-                        showToast('Conta administrativa criada com sucesso!', 'success');
-                        
-                        db.collection("users").doc(user.uid).set({
-                            email: user.email,
-                            name: "Administrador",
-                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                        });
-                    })
-                    .catch(error => {
-                        console.error("Erro ao tornar admin:", error);
-                        showToast('Erro ao conceder acesso administrativo', 'error');
-                    });
-                })
-                .catch((error) => {
-                    console.error("Erro ao criar conta: ", error);
-                    
-                    let errorMessage = "Erro ao criar conta. ";
-                    
-                    switch(error.code) {
-                        case "auth/email-already-in-use":
-                            errorMessage = "Este e-mail já está em uso. Tente fazer login.";
-                            break;
-                        case "auth/invalid-email":
-                            errorMessage = "E-mail inválido. Digite um e-mail válido.";
-                            break;
-                        case "auth/weak-password":
-                            errorMessage = "Senha fraca. Use pelo menos 6 caracteres.";
-                            break;
-                        default:
-                            errorMessage = "Ocorreu um erro ao criar a conta.";
-                    }
-                    
-                    loginError.textContent = errorMessage;
-                    loginError.style.display = 'block';
-                });
-        }
-        
-        // Logout do sistema
-        function handleLogout() {
-            // Limpar dados do usuário
-            localStorage.removeItem('userToken');
-            localStorage.removeItem('userName');
-            localStorage.removeItem('isAdmin');
-            
-            // Sair do Firebase Auth se for admin
-            auth.signOut().then(() => {
-                showToast('Você saiu da conta', 'info');
+                image
+            })
+            .then(() => {
+                showToast('Leilão atualizado com sucesso!', 'success');
+                resetAdminForm();
+            })
+            .catch(error => {
+                console.error("Erro ao atualizar leilão: ", error);
+                showToast('Erro ao atualizar leilão', 'error');
             });
-            
-            // Limpar interface
-            userInfo.style.display = 'none';
-            adminInfo.style.display = 'none';
-            adminPanel.style.display = 'none';
-            isAdmin = false;
-            
-            // Resetar estado da aplicação
-            userToken = null;
-            userName = null;
-            
-            // Recarregar a página para reiniciar a interface
-            location.reload();
+        }
+    }
+    
+    // Resetar formulário admin
+    function resetAdminForm() {
+        auctionIdSelect.value = 'new';
+        document.getElementById('auction-title').value = '';
+        document.getElementById('auction-description').value = '';
+        document.getElementById('auction-category').value = '';
+        document.getElementById('auction-duration').value = '60'; // 60 minutos padrão
+        document.getElementById('auction-start-bid').value = '';
+        document.getElementById('auction-image').value = '';
+    }
+    
+    // Lidar com login admin
+    function handleLogin() {
+        const email = adminEmailInput.value;
+        const password = adminPasswordInput.value;
+        
+        if (!email || !password) {
+            loginError.textContent = "Por favor, preencha todos os campos";
+            loginError.style.display = 'block';
+            return;
         }
         
-        // Função para mostrar detalhes da compra
-        function showPurchaseDetails(auction) {
-            purchaseDetails.innerHTML = `
-                <div class="auction-purchase-info">
-                    <h3>${auction.title}</h3>
-                    <div class="purchase-summary">
-                        <p><strong>Código de compra:</strong> <span class="code-value">${auction.code}</span></p>
-                        <p><strong>Valor final:</strong> R$ ${auction.currentBid.toFixed(2)}</p>
-                        <p><strong>Status:</strong> Aguardando pagamento</p>
-                    </div>
-                    <div class="instructions">
-                        <h4>Como finalizar sua compra:</h4>
-                        <ol>
-                            <li>Copie seu código de compra: <strong>${auction.code}</strong></li>
-                            <li>Entre em contato conosco via WhatsApp ou e-mail</li>
-                            <li>Informe o código de compra e o item adquirido</li>
-                            <li>Combine a forma de pagamento e entrega</li>
-                        </ol>
-                        <p class="warning" style="color: #d32f2f; margin-top: 15px; font-weight: 500;">
-                            <i class="fas fa-exclamation-triangle"></i> Este código é válido por 7 dias
-                        </p>
-                    </div>
-                </div>
-            `;
-            
-            const message = encodeURIComponent(
-                `Olá! Venci o leilão do item "${auction.title}" (Código: ${auction.code}). Gostaria de finalizar a compra.`
-            );
-            btnWhatsapp.href = `https://wa.me/SEUNUMERO?text=${message}`;
-            
-            purchaseModal.style.display = 'flex';
-            
-            // Adicionar evento para copiar código no modal
-            const modalCode = document.querySelector('.purchase-summary .code-value');
-            if (modalCode) {
-                modalCode.addEventListener('click', () => {
-                    copyCodeToClipboard(auction.code);
+        auth.signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                
+                db.collection("users").doc(user.uid).set({
+                    email: user.email,
+                    name: "Administrador",
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+                
+                checkAdminStatus(user.uid).then(isAdminUser => {
+                    loginModal.style.display = 'none';
+                    adminEmailInput.value = '';
+                    adminPasswordInput.value = '';
+                    loginError.style.display = 'none';
+                    
+                    if (isAdminUser) {
+                        adminInfo.style.display = 'block';
+                        adminPanel.style.display = 'block';
+                        showToast('Acesso administrativo concedido', 'success');
+                    } else {
+                        showToast('Login realizado, mas você não é administrador', 'info');
+                    }
                 });
-            }
+            })
+            .catch((error) => {
+                console.error("Erro de login: ", error);
+                
+                let errorMessage = "Erro ao fazer login. ";
+                
+                switch(error.code) {
+                    case "auth/invalid-email":
+                        errorMessage = "E-mail inválido. Verifique seu e-mail.";
+                        break;
+                    case "auth/user-disabled":
+                        errorMessage = "Conta desativada. Contate o suporte.";
+                        break;
+                    case "auth/user-not-found":
+                        errorMessage = "Usuário não encontrado. Verifique o e-mail digitado.";
+                        break;
+                    case "auth/wrong-password":
+                        errorMessage = "Senha incorreta. Tente novamente.";
+                        break;
+                    case "auth/too-many-requests":
+                        errorMessage = "Muitas tentativas. Tente novamente mais tarde.";
+                        break;
+                    default:
+                        errorMessage = "Ocorreu um erro. Tente novamente.";
+                }
+                
+                loginError.textContent = errorMessage;
+                loginError.style.display = 'block';
+            });
+    }
+    
+    // Logout do sistema
+    function handleLogout() {
+        // Limpar dados do usuário
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('isAdmin');
+        
+        // Sair do Firebase Auth se for admin
+        auth.signOut().then(() => {
+            showToast('Você saiu da conta', 'info');
+        });
+        
+        // Limpar interface
+        userInfo.style.display = 'none';
+        adminInfo.style.display = 'none';
+        adminPanel.style.display = 'none';
+        isAdmin = false;
+        
+        // Resetar estado da aplicação
+        userToken = null;
+        userName = null;
+        
+        // Recarregar a página para reiniciar a interface
+        location.reload();
+    }
+    
+    // Mostrar modal com token
+    function showTokenModal() {
+        if (userToken) {
+            tokenDisplay.textContent = userToken;
+            tokenModal.style.display = 'flex';
+        } else {
+            tokenSetupModal.style.display = 'flex';
         }
-    </script>
+    }
+    
+    // Copiar token
+    function copyTokenToClipboard() {
+        navigator.clipboard.writeText(userToken)
+            .then(() => {
+                showToast('Token copiado para a área de transferência!', 'success');
+            })
+            .catch(err => {
+                showToast('Erro ao copiar token', 'error');
+            });
+    }
+    
+    // Mostrar modal de compra
+    function showPurchaseModal(auction) {
+        purchaseTitle.textContent = auction.title;
+        purchaseCode.textContent = auction.code;
+        purchaseValue.textContent = `R$ ${auction.currentBid.toFixed(2)}`;
+        purchaseStatus.textContent = 'Aguardando confirmação';
+        
+        // Configurar link do WhatsApp
+        const message = encodeURIComponent(
+            `Olá! Venci o leilão do item "${auction.title}" (Código: ${auction.code}). Gostaria de finalizar a compra.`
+        );
+        btnWhatsapp.href = `https://wa.me/?text=${message}`;
+        
+        purchaseModal.style.display = 'flex';
+    }
+</script>
 </body>
 </html>
