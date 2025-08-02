@@ -1039,11 +1039,11 @@
             Conectando ao Firebase...
         </div>
         
-        <div class="admin-info" id="admin-info" style="display: none;">
+        <div class="admin-info" id="admin-info">
             <i class="fas fa-user-shield"></i> Modo Administrador Ativo
         </div>
         
-        <div class="user-info" id="user-info" style="display: none;">
+        <div class="user-info" id="user-info">
             <i class="fas fa-user"></i>
             <span id="user-email">usuário@exemplo.com</span>
             <button class="btn-logout" id="btn-logout" title="Sair">
@@ -1145,7 +1145,6 @@
                 
                 <p><strong>Importante:</strong> Código válido por 7 dias.</p>
             </div>
-            <!-- REMOVIDO O FOOTER COM O BOTÃO FECHAR -->
         </div>
     </div>
 
@@ -1211,7 +1210,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <!-- REMOVIDO O BOTÃO FECHAR -->
                 <button class="btn-admin" id="copy-token">
                     <i class="fas fa-copy"></i> Copiar Token
                 </button>
@@ -1347,6 +1345,11 @@
 
     // Inicialização
     document.addEventListener('DOMContentLoaded', () => {
+        // Ocultar elementos que devem começar invisíveis
+        adminInfo.style.display = 'none';
+        userInfo.style.display = 'none';
+        adminPanel.style.display = 'none';
+        
         // Inicializar Firebase Auth
         auth.onAuthStateChanged(user => {
             if (user) {
