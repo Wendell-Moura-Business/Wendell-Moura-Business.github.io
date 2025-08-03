@@ -269,7 +269,7 @@
 
         .bid-amount {
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--bid-color);
         }
 
@@ -1002,6 +1002,26 @@
                 opacity: 0;
             }
         }
+
+        /* Estilização da barra de rolagem do histórico de preços */
+        .bid-history::-webkit-scrollbar {
+            width: 6px;
+            background-color: transparent;
+        }
+
+        .bid-history::-webkit-scrollbar-thumb {
+            background-color: var(--secondary);
+            border-radius: 3px;
+        }
+
+        .bid-history::-webkit-scrollbar-thumb:hover {
+            background-color: var(--primary);
+        }
+
+        .bid-history {
+            scrollbar-width: thin;
+            scrollbar-color: var(--shadow) transparent;
+        }
     </style>
     
     <!-- Firebase SDK -->
@@ -1030,7 +1050,7 @@
                     <i class="fas fa-sign-out-alt"></i>
                 </button>
                 <button class="header-btn" id="theme-toggle" title="Alternar tema">
-                    <span class="theme-icon">☀️</span>
+                    <span class="theme-icon">🔆</span>
                 </button>
             </div>
         </header>
@@ -1133,17 +1153,17 @@
                 <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>Bem-vindo ao nosso sistema de leilão de miniaturas:</p>
+                <p><strong>Bem-vindo ao nosso sistema de leilão de miniaturas:</strong></p>
                 
                 <ol>
-                    <p><strong>Leilões por tempo limitado</strong> - Cada item tem duração determinada</p>
-                    <p><strong>Faça seu lance</strong> - Deve ser maior que o atual</p>
-                    <p><strong>Acompanhe</strong> - Tempo restante e lances concorrentes</p>
-                    <p><strong>Finalização</strong> - Maior lance vence ao término</p>
-                    <p><strong>Código de compra</strong> - Gere código único para resgate</p>
+                    <p><strong>Leilões por tempo limitado:</strong> Cada item tem duração determinada;</p>
+                    <p><strong>Faça seu lance:</strong> Deve ser maior que o atual;</p>
+                    <p><strong>Acompanhe:</strong> Tempo restante e lances concorrentes;</p>
+                    <p><strong>Finalização:</strong> Maior lance vence ao término;</p>
+                    <p><strong>Código de compra:</strong> Gere código único para resgate.</p>
                 </ol>
                 
-                <p><strong>Importante:</strong> Código válido por 7 dias.</p>
+                <p><strong>Importante:</strong> Código válido por 3 (três) dias.</p>
             </div>
         </div>
     </div>
@@ -1184,7 +1204,7 @@
                 </div>
                 
                 <p class="warning-note">
-                    <i class="fas fa-exclamation-circle"></i> Código válido por 7 dias
+                    <i class="fas fa-exclamation-circle"></i> Código válido por 3 (três) dias
                 </p>
             </div>
             <div class="modal-footer">
@@ -1233,7 +1253,7 @@
                 <div id="new-token-form" class="token-form active">
                     <div class="admin-form-group">
                         <label for="user-name">Seu Nome ou Apelido</label>
-                        <input type="text" id="user-name" required>
+                        <input type="text" id="user-name">
                     </div>
                     <button class="btn-bid" id="btn-create-token">Criar Novo Token</button>
                 </div>
@@ -1241,7 +1261,7 @@
                 <div id="existing-token-form" class="token-form">
                     <div class="admin-form-group">
                         <label for="existing-token">Cole seu Token aqui</label>
-                        <input type="text" id="existing-token" required>
+                        <input type="text" id="existing-token">
                     </div>
                     <button class="btn-bid" id="btn-use-token">Usar Token</button>
                 </div>
@@ -1947,7 +1967,7 @@
     function toggleTheme() {
         document.body.classList.toggle('dark-theme');
         currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
-        themeToggle.innerHTML = currentTheme === 'dark' ? '<span class="theme-icon">☀️</span>' : '<span class="theme-icon">🌙</span>';
+        themeToggle.innerHTML = currentTheme === 'dark' ? '<span class="theme-icon">🔆</span>' : '<span class="theme-icon">◉</span>';
         localStorage.setItem('theme', currentTheme);
     }
 
