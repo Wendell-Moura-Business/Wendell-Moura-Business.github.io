@@ -73,11 +73,14 @@
             font-size: 14px;
             -webkit-font-smoothing: antialiased;
             background: linear-gradient(135deg, var(--body-bg) 0%, #e0e7ed 100%);
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            flex: 1;
         }
 
         header {
@@ -88,7 +91,7 @@
             padding-bottom: 15px;
             border-bottom: 1px solid var(--border);
             background: var(--card-bg);
-            padding: 15px;
+            padding: 8px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
@@ -140,8 +143,8 @@
 
         .auctions-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 15px;
             margin-bottom: 30px;
         }
 
@@ -205,6 +208,7 @@
             letter-spacing: 0.5px;
             color: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 2;
         }
 
         .category-novo { background-color: var(--category-novo); }
@@ -225,6 +229,9 @@
             font-size: 0.8rem;
             font-weight: 600;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            max-width: 100px;
+            text-align: center;
+            z-index: 2;
         }
 
         .card-content {
@@ -240,6 +247,11 @@
             color: var(--primary);
             margin-bottom: 12px;
             line-height: 1.3;
+            min-height: 3.3em;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .card-description {
@@ -248,6 +260,11 @@
             margin-bottom: 15px;
             flex-grow: 1;
             line-height: 1.5;
+            min-height: 4.5em;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .bid-section {
@@ -260,16 +277,19 @@
             justify-content: space-between;
             margin-bottom: 12px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .bid-label {
             font-size: 0.85rem;
             color: var(--secondary);
+            width: 100%;
+            margin-bottom: 4px;
         }
 
         .bid-amount {
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: var(--bid-color);
         }
 
@@ -277,6 +297,8 @@
             font-size: 0.8rem;
             color: var(--secondary);
             text-align: right;
+            flex-grow: 1;
+            margin-top: 4px;
         }
 
         .bid-form {
@@ -295,6 +317,7 @@
             font-size: 0.9rem;
             font-family: 'Inter', sans-serif;
             height: 36px;
+            max-width: 130px; /* Reduzido para acomodar melhor */
         }
 
         .btn-bid {
@@ -302,17 +325,43 @@
             color: white;
             border: none;
             border-radius: 6px;
-            padding: 0 5px;
+            padding: 0 10px;
             cursor: pointer;
             font-weight: 600;
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
-            height: 33px;
+            height: 36px;
             transition: all 0.2s;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            min-width: 58px;
         }
 
         .btn-bid:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-max-bid {
+            background: linear-gradient(135deg, var(--warning) 0%, #e67e22 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-max-bid:hover {
             opacity: 0.9;
             transform: translateY(-2px);
         }
@@ -340,12 +389,15 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 8px;
+            flex-wrap: wrap;
         }
         
         .code-label {
             font-weight: 600;
             color: var(--text);
             font-size: 0.85rem;
+            width: 100%;
+            margin-bottom: 4px;
         }
         
         .code-value {
@@ -361,11 +413,12 @@
             max-width: 100%;
             word-break: break-all;
             white-space: normal;
-            text-align: left;
+            text-align: center;
             min-height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 100%;
         }
         
         .code-value:hover {
@@ -386,6 +439,10 @@
             margin-top: 10px;
             transition: all 0.2s;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .btn-purchase:hover {
@@ -406,7 +463,7 @@
         }
         
         .status-bar {
-            padding: 15px;
+            padding: 6px 20px;
             background-color: var(--card-bg);
             border-radius: 8px;
             font-size: 0.9rem;
@@ -417,6 +474,9 @@
             align-items: center;
             margin-bottom: 20px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            z-index: 10;
+            flex-wrap: wrap;
+            gap: 12px;
         }
         
         .filter-buttons {
@@ -449,7 +509,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 15px;
+            padding: 5px 15px;
             background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(41, 128, 185, 0.1) 100%);
             color: var(--info);
             border-radius: 6px;
@@ -475,7 +535,7 @@
         .admin-info {
             background: linear-gradient(135deg, rgba(243, 156, 18, 0.1) 0%, rgba(211, 132, 11, 0.1) 100%);
             color: var(--warning);
-            padding: 10px 15px;
+            padding: 5px 15px;
             border-radius: 6px;
             margin-bottom: 15px;
             font-size: 0.9rem;
@@ -542,7 +602,7 @@
             color: white;
             border: none;
             border-radius: 6px;
-            padding: 12px 0;
+            padding: 8px 0;
             cursor: pointer;
             font-weight: 600;
             grid-column: span 2;
@@ -572,6 +632,7 @@
             justify-content: space-between;
             padding: 8px 0;
             border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
         }
         
         .bid-history-item:last-child {
@@ -581,6 +642,8 @@
         .bid-history-name {
             font-weight: 600;
             color: var(--text);
+            width: 100%;
+            margin-bottom: 2px;
         }
         
         .bid-history-amount {
@@ -599,6 +662,7 @@
             gap: 20px;
             margin-top: 20px;
             align-items: center;
+            flex-wrap: wrap;
         }
         
         .page-info {
@@ -738,7 +802,7 @@
             border-radius: 12px;
             width: 90%;
             max-width: 500px;
-            max-height: 90vh;
+            max-height: 99vh;
             overflow-y: auto;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border);
@@ -777,6 +841,7 @@
             padding: 20px;
             line-height: 1.6;
             font-size: 0.95rem;
+            overflow-y: auto;
         }
         
         .modal-body p {
@@ -790,6 +855,7 @@
             justify-content: flex-end;
             gap: 12px;
             border-top: 1px solid var(--border);
+            flex-wrap: wrap;
         }
         
         .btn-close {
@@ -836,10 +902,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
         
         .purchase-summary strong {
             font-weight: 600;
+            width: 100px;
+        }
+        
+        .purchase-summary span {
+            text-align: right;
+            flex-grow: 1;
         }
         
         .purchase-instructions {
@@ -896,10 +969,222 @@
             transform: translateY(-2px);
         }
         
+        /* Estilização da barra de rolagem */
+        .modal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .modal-body::-webkit-scrollbar-track {
+            background: var(--body-bg);
+        }
+        
+        .modal-body::-webkit-scrollbar-thumb {
+            background-color: var(--primary);
+            border-radius: 4px;
+        }
+        
+        .bid-history::-webkit-scrollbar {
+            width: 6px;
+            background-color: transparent;
+        }
+
+        .bid-history::-webkit-scrollbar-thumb {
+            background-color: var(--secondary);
+            border-radius: 3px;
+        }
+
+        .bid-history::-webkit-scrollbar-thumb:hover {
+            background-color: var(--primary);
+        }
+
+        .bid-history {
+            scrollbar-width: thin;
+            scrollbar-color: var(--shadow) transparent;
+        }
+        
+        /* Footer com créditos */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            color: var(--secondary);
+            font-size: 0.8rem;
+            margin-top: 20px;
+        }
+        
+        .admin-action-panel {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background-color: rgba(231, 76, 60, 0.05);
+        }
+        
+        .admin-action-panel h3 {
+            color: var(--danger);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .admin-action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .admin-action-btn {
+            padding: 8px 15px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-pass {
+            background: linear-gradient(135deg, var(--warning) 0%, #e67e22 100%);
+            color: white;
+        }
+        
+        .btn-complete {
+            background: linear-gradient(135deg, var(--success) 0%, #1e8449 100%);
+            color: white;
+        }
+        
+        .btn-restart {
+            background: linear-gradient(135deg, var(--danger) 0%, #c0392b 100%);
+            color: white;
+        }
+        
+        .admin-action-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .status-info {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 3px solid var(--info);
+            padding: 10px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+
+        .purchase-status-badge {
+            background-color: var(--success);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .urgent {
+            background-color: var(--danger) !important;
+            color: white !important;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Botão de troca de token */
+        .btn-change-token {
+            background: linear-gradient(135deg, var(--warning) 0%, #e67e22 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-change-token:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* ESTILOS ESPECÍFICOS PARA DIFERENTES TIPOS DE INPUT */
+        /* Inputs de lance nos cards */
+        .auction-card .bid-input {
+            max-width: 154px; /* Mantido para lances */
+        }
+
+        /* Inputs em modais (login, token, etc) */
+        .modal-body .bid-input {
+            max-width: 100%; /* Ocupa toda a largura disponível */
+            width: 100%;
+        }
+
+        /* Inputs no painel admin */
+        .admin-form-group input {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        /* CORREÇÃO 1: Alinhar botões em duas colunas */
+        .admin-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Duas colunas */
+            gap: 15px;
+        }
+
+        .btn-admin {
+            grid-column: span 1; /* Ocupa apenas uma coluna */
+            margin-top: 0; /* Remover margem superior */
+        }
+
+        /* Centralizar botões em uma nova linha */
+        .admin-buttons-container {
+            grid-column: span 2;
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .admin-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-buttons-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .auctions-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .auctions-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
             .auctions-grid {
-                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-                gap: 15px;
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 12px;
             }
             
             .status-bar {
@@ -925,6 +1210,18 @@
                 font-size: 0.85rem;
                 padding: 6px 10px;
             }
+            
+            .admin-action-buttons {
+                flex-direction: column;
+            }
+            
+            .admin-action-btn {
+                width: 100%;
+            }
+            
+            .header-left h1 {
+                font-size: 1.3rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -944,12 +1241,31 @@
                 width: 100%;
             }
             
-            .header-left h1 {
-                font-size: 1.3rem;
-            }
-            
             .code-value {
                 font-size: 0.8rem;
+            }
+            
+            .time-remaining {
+                font-size: 0.65rem;
+                padding: 3px 8px;
+                max-width: 70px;
+            }
+            
+            .card-title {
+                font-size: 1rem;
+            }
+            
+            .filter-btn {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+            }
+            
+            .btn-close, .btn-whatsapp, .btn-admin {
+                width: 100%;
             }
         }
         
@@ -1002,26 +1318,6 @@
                 opacity: 0;
             }
         }
-
-        /* Estilização da barra de rolagem do histórico de preços */
-        .bid-history::-webkit-scrollbar {
-            width: 6px;
-            background-color: transparent;
-        }
-
-        .bid-history::-webkit-scrollbar-thumb {
-            background-color: var(--secondary);
-            border-radius: 3px;
-        }
-
-        .bid-history::-webkit-scrollbar-thumb:hover {
-            background-color: var(--primary);
-        }
-
-        .bid-history {
-            scrollbar-width: thin;
-            scrollbar-color: var(--shadow) transparent;
-        }
     </style>
     
     <!-- Firebase SDK -->
@@ -1045,9 +1341,6 @@
                 </button>
                 <button class="header-btn" id="admin-toggle" title="Painel Admin">
                     <i class="fas fa-cog"></i>
-                </button>
-                <button class="header-btn" id="logout-btn" title="Sair">
-                    <i class="fas fa-sign-out-alt"></i>
                 </button>
                 <button class="header-btn" id="theme-toggle" title="Alternar tema">
                     <span class="theme-icon">🔆</span>
@@ -1112,10 +1405,14 @@
                     <label for="auction-image">URL da Imagem:</label>
                     <input type="text" id="auction-image">
                 </div>
-                <button class="btn-admin" id="save-auction">Salvar Leilão</button>
-                <button class="btn-admin" id="make-admin" style="background: linear-gradient(135deg, var(--info) 0%, #2980b9 100%);">
-                    <i class="fas fa-user-crown"></i> Tornar-se Administrador
-                </button>
+                
+                <!-- Container para os botões alinhados -->
+                <div class="admin-buttons-container">
+                    <button class="btn-admin" id="save-auction">Salvar Leilão</button>
+                    <button class="btn-admin" id="make-admin" style="background: linear-gradient(135deg, var(--info) 0%, #2980b9 100%);">
+                        <i class="fas fa-user-crown"></i> Tornar-se Administrador
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -1143,6 +1440,11 @@
         <div class="pagination-controls" id="pagination-controls">
             <!-- Paginação será gerada dinamicamente -->
         </div>
+        
+        <!-- Footer com créditos discretos -->
+        <footer class="footer">
+            Desenvolvido por Leilão Minis
+        </footer>
     </div>
 
     <!-- Modal de instruções -->
@@ -1156,11 +1458,12 @@
                 <p><strong>Bem-vindo ao nosso sistema de leilão de miniaturas:</strong></p>
                 
                 <ol>
-                    <p><strong>Leilões por tempo limitado:</strong> Cada item tem duração determinada;</p>
-                    <p><strong>Faça seu lance:</strong> Deve ser maior que o atual;</p>
-                    <p><strong>Acompanhe:</strong> Tempo restante e lances concorrentes;</p>
-                    <p><strong>Finalização:</strong> Maior lance vence ao término;</p>
-                    <p><strong>Código de compra:</strong> Gere código único para resgate.</p>
+                    <li><strong>Leilões por tempo limitado:</strong> Cada item tem duração determinada.</li>
+                    <li><strong>Faça seu lance:</strong> Deve ser maior que o atual. Você pode usar o botão "Lance Máximo" para dar um lance automaticamente calculado (valor atual + 20% + R$1,00).</li>
+                    <li><strong>Acompanhe:</strong> Tempo restante e lances concorrentes.</li>
+                    <li><strong>Finalização:</strong> Maior lance vence ao término.</li>
+                    <li><strong>Código de compra:</strong> Gere código único para resgate.</li>
+                    <li><strong>Conclusão da compra:</strong> O vencedor tem 3 dias para concluir a compra. Após esse período, o item poderá ser oferecido ao segundo colocado, e assim por diante até o terceiro colocado. Se nenhum dos três primeiros concluir a compra, o item será colocado novamente em leilão.</li>
                 </ol>
                 
                 <p><strong>Importante:</strong> Código válido por 3 (três) dias.</p>
@@ -1189,7 +1492,7 @@
                     </p>
                     <p>
                         <strong>Status:</strong> 
-                        <span id="purchase-status">Aguardando confirmação</span>
+                        <span id="purchase-status">Aguardando conclusão da compra</span>
                     </p>
                 </div>
                 
@@ -1228,6 +1531,9 @@
                 <div style="background-color: var(--body-bg); padding: 15px; border-radius: 6px; margin: 15px 0; text-align: center;">
                     <strong id="token-display">TOK-XXXXXXXX</strong>
                 </div>
+                <button class="btn-change-token" id="change-token">
+                    <i class="fas fa-exchange-alt"></i> Trocar Token
+                </button>
             </div>
             <div class="modal-footer">
                 <button class="btn-admin" id="copy-token">
@@ -1253,7 +1559,7 @@
                 <div id="new-token-form" class="token-form active">
                     <div class="admin-form-group">
                         <label for="user-name">Seu Nome ou Apelido</label>
-                        <input type="text" id="user-name">
+                        <input type="text" id="user-name" placeholder="Ex: Carlos Silva">
                     </div>
                     <button class="btn-bid" id="btn-create-token">Criar Novo Token</button>
                 </div>
@@ -1261,7 +1567,7 @@
                 <div id="existing-token-form" class="token-form">
                     <div class="admin-form-group">
                         <label for="existing-token">Cole seu Token aqui</label>
-                        <input type="text" id="existing-token">
+                        <input type="text" id="existing-token" placeholder="Ex: TOK-ABCD1234">
                     </div>
                     <button class="btn-bid" id="btn-use-token">Usar Token</button>
                 </div>
@@ -1325,7 +1631,6 @@
     const adminPasswordInput = document.getElementById('admin-password');
     const btnLogin = document.getElementById('btn-login');
     const loginError = document.getElementById('login-error');
-    const logoutBtn = document.getElementById('logout-btn');
     const btnLogout = document.getElementById('btn-logout');
     const purchaseModal = document.getElementById('purchase-modal');
     const btnWhatsapp = document.getElementById('btn-whatsapp');
@@ -1346,6 +1651,7 @@
     const btnUseToken = document.getElementById('btn-use-token');
     const userNameInput = document.getElementById('user-name');
     const existingTokenInput = document.getElementById('existing-token');
+    const changeTokenBtn = document.getElementById('change-token');
 
     // Estado da aplicação
     let currentTheme = 'dark';
@@ -1356,9 +1662,10 @@
     let isAdmin = localStorage.getItem('isAdmin') === 'true';
     let unsubscribeAuctions = null;
     let currentPage = 1;
-    const auctionsPerPage = 4;
+    const auctionsPerPage = 10;
     let totalAuctions = 0;
     let auctionTimers = [];
+    let isProcessing = false; // Controle de múltiplos cliques
     
     // Número do WhatsApp para contato
     const whatsappNumber = "5511999999999"; // Substitua pelo número real
@@ -1372,20 +1679,7 @@
         
         // Inicializar Firebase Auth
         auth.onAuthStateChanged(user => {
-            if (user) {
-                userInfo.style.display = 'flex';
-                userEmail.textContent = user.email;
-                
-                // Verificar se o usuário é admin
-                checkAdminStatus(user.uid).then(isAdminUser => {
-                    if (isAdminUser) {
-                        adminInfo.style.display = 'block';
-                    }
-                });
-            } else {
-                userInfo.style.display = 'none';
-                adminInfo.style.display = 'none';
-            }
+            updateUIOnChanges();
         });
 
         // Verificar token
@@ -1402,7 +1696,6 @@
         instructionsBtn.addEventListener('click', () => {
             instructionsModal.style.display = 'flex';
         });
-        logoutBtn.addEventListener('click', handleLogout);
         btnLogout.addEventListener('click', handleLogout);
         btnClosePurchase.addEventListener('click', () => {
             purchaseModal.style.display = 'none';
@@ -1447,6 +1740,12 @@
         // Usar token existente
         btnUseToken.addEventListener('click', useExistingToken);
         
+        // Botão para trocar token
+        changeTokenBtn.addEventListener('click', () => {
+            tokenModal.style.display = 'none';
+            tokenSetupModal.style.display = 'flex';
+        });
+        
         // Fechar modais ao clicar fora do conteúdo
         document.addEventListener('click', (e) => {
             if (e.target === instructionsModal) instructionsModal.style.display = 'none';
@@ -1469,6 +1768,30 @@
             auctionTimers.forEach(timer => clearInterval(timer));
         });
     });
+
+    // Atualizar interface quando houver mudanças
+    function updateUIOnChanges() {
+        // Atualizar informações do usuário
+        const user = auth.currentUser;
+        if (user) {
+            userInfo.style.display = 'flex';
+            userEmail.textContent = user.email;
+            
+            checkAdminStatus(user.uid).then(isAdminUser => {
+                if (isAdminUser) {
+                    adminInfo.style.display = 'block';
+                    isAdmin = true;
+                } else {
+                    adminInfo.style.display = 'none';
+                    isAdmin = false;
+                }
+            });
+        } else {
+            userInfo.style.display = 'none';
+            adminInfo.style.display = 'none';
+            isAdmin = false;
+        }
+    }
 
     // Função para criar novo token
     function createNewToken() {
@@ -1644,11 +1967,19 @@
             const timeRemaining = endTime - Date.now();
             const ended = timeRemaining <= 0;
             
-            const isHighestBidder = auction.highestBidder && auction.highestBidder.id === userToken;
-            const isWinner = auction.winnerId && auction.winnerId === userToken;
+            // Determinar token do usuário
+            let bidderToken = userToken;
+            if (isAdmin && !bidderToken) {
+                const user = auth.currentUser;
+                if (user) bidderToken = user.uid;
+            }
+            
+            const isHighestBidder = auction.highestBidder && auction.highestBidder.id === bidderToken;
+            const isWinner = auction.winnerId && auction.winnerId === bidderToken;
             const canGenerateCode = ended && isHighestBidder && !auction.code;
             
             const showWinnerSection = ended && auction.code && (isWinner || isAdmin);
+            const showPurchaseStatus = auction.purchaseCompleted && (isWinner || isAdmin);
             
             const categoryClass = auction.category ? 
                 `category-${auction.category.toLowerCase().replace(/ /g, '-')}` : 
@@ -1665,7 +1996,7 @@
                         `<div class="image-placeholder"><i class="fas fa-cube"></i></div>`
                     }
                     ${auction.category ? `<div class="category-tag ${categoryClass}">${auction.category}</div>` : ''}
-                    <div class="time-remaining">
+                    <div class="time-remaining ${timeRemaining < 600000 && timeRemaining > 0 ? 'urgent' : ''}">
                         <span class="countdown" id="countdown-${auction.id}">${formatTime(timeRemaining)}</span>
                     </div>
                 </div>
@@ -1703,6 +2034,9 @@
                                        required>
                                 <button type="submit" class="btn-bid">Lance</button>
                             </form>
+                            <button class="btn-max-bid" data-id="${auction.id}">
+                                <i class="fas fa-bolt"></i> Lance Máximo (R$ ${(auction.currentBid + (auction.currentBid * 0.2) + 1).toFixed(2)})
+                            </button>
                         `}
                         
                         ${canGenerateCode ? `
@@ -1718,11 +2052,18 @@
                                     <span class="code-label">${isWinner ? 'Seu código:' : 'Código do vencedor:'}</span>
                                     <span class="code-value">${auction.code}</span>
                                 </div>
-                                ${isWinner ? `
-                                    <button class="btn-purchase" data-id="${auction.id}">
-                                        <i class="fas fa-shopping-cart"></i> Finalizar Compra
-                                    </button>
-                                ` : ''}
+                                ${showPurchaseStatus ? 
+                                    `<div class="status-info">
+                                        <strong>Status da Compra:</strong> 
+                                        <span class="purchase-status-badge">Concluída</span>
+                                    </div>` 
+                                    : 
+                                    (isWinner ? `
+                                        <button class="btn-purchase" data-id="${auction.id}">
+                                            <i class="fas fa-shopping-cart"></i> Finalizar Compra
+                                        </button>
+                                    ` : '')
+                                }
                             </div>
                         ` : ''}
                         
@@ -1733,12 +2074,40 @@
                                     <div class="bid-history-item">
                                         <span class="bid-history-name">
                                             ${bid.name} 
-                                            ${bid.id === userToken ? '<span class="winner-badge">Você</span>' : ''}
+                                            ${bid.id === bidderToken ? '<span class="winner-badge">Você</span>' : ''}
                                         </span>
-                                        <span class="bid-history-amount">R$ ${bid.amount.toFixed(2)}</span>
-                                        <span class="bid-history-time">${formatTimeShort(bid.timestamp)}</span>
+                                        <div style="display: flex; width: 100%; justify-content: space-between;">
+                                            <span class="bid-history-amount">R$ ${bid.amount.toFixed(2)}</span>
+                                            <span class="bid-history-time">${formatTimeShort(bid.timestamp)}</span>
+                                        </div>
                                     </div>
                                 `).join('')}
+                            </div>
+                        ` : ''}
+                        
+                        <!-- Painel de ação para administradores -->
+                        ${ended && isAdmin ? `
+                            <div class="admin-action-panel">
+                                <h3>Ações Administrativas</h3>
+                                
+                                <div class="status-info">
+                                    <strong>Status da Compra:</strong> 
+                                    ${auction.purchaseCompleted ? 'Concluída' : 'Aguardando conclusão'}
+                                </div>
+                                
+                                <div class="admin-action-buttons">
+                                    ${!auction.purchaseCompleted ? `
+                                        <button class="admin-action-btn btn-pass" data-id="${auction.id}" data-action="pass">
+                                            <i class="fas fa-exchange-alt"></i> Passar para próximo
+                                        </button>
+                                        <button class="admin-action-btn btn-complete" data-id="${auction.id}" data-action="complete">
+                                            <i class="fas fa-check-circle"></i> Marcar como concluída
+                                        </button>
+                                    ` : ''}
+                                    <button class="admin-action-btn btn-restart" data-id="${auction.id}" data-action="restart">
+                                        <i class="fas fa-redo"></i> Reiniciar leilão
+                                    </button>
+                                </div>
                             </div>
                         ` : ''}
                     </div>
@@ -1750,6 +2119,9 @@
             if (!ended) {
                 const form = card.querySelector('.bid-form');
                 form && form.addEventListener('submit', (e) => handleBid(e, auction.id));
+                
+                const maxBidBtn = card.querySelector('.btn-max-bid');
+                maxBidBtn && maxBidBtn.addEventListener('click', () => handleMaxBid(auction));
             }
             
             if (canGenerateCode) {
@@ -1757,9 +2129,21 @@
                 btn && btn.addEventListener('click', () => generateCode(auction.id));
             }
             
-            if (showWinnerSection) {
+            if (showWinnerSection && !showPurchaseStatus && isWinner) {
                 const btn = card.querySelector('.btn-purchase');
                 btn && btn.addEventListener('click', () => showPurchaseModal(auction));
+            }
+            
+            // Adicionar eventos para ações administrativas
+            if (ended && isAdmin) {
+                const passBtn = card.querySelector('.btn-pass');
+                passBtn && passBtn.addEventListener('click', () => passToNextBidder(auction.id));
+                
+                const completeBtn = card.querySelector('.btn-complete');
+                completeBtn && completeBtn.addEventListener('click', () => markAsCompleted(auction.id));
+                
+                const restartBtn = card.querySelector('.btn-restart');
+                restartBtn && restartBtn.addEventListener('click', () => restartAuction(auction.id));
             }
         });
         
@@ -1790,6 +2174,112 @@
         updateStatusBar();
     }
 
+    // Função para lidar com lance máximo (CORREÇÃO)
+    function handleMaxBid(auction) {
+        // Calcular lance máximo: valor atual + 20% + 1 real
+        const maxBid = parseFloat((auction.currentBid * 1.2 + 1).toFixed(2));
+        
+        // Encontrar o formulário de lance
+        const form = document.querySelector(`.bid-form[data-id="${auction.id}"]`);
+        if (!form) return;
+        
+        // Preencher o input com o valor máximo
+        const bidInput = form.querySelector('.bid-input');
+        bidInput.value = maxBid;
+        
+        // Disparar o evento de input para validar
+        bidInput.dispatchEvent(new Event('input', { bubbles: true }));
+        
+        // Encontrar o botão de submeter e clicar
+        const submitButton = form.querySelector('.btn-bid');
+        if (submitButton) {
+            submitButton.click();
+        }
+    }
+
+    // Função para passar o leilão para o próximo colocado (CORREÇÃO)
+    function passToNextBidder(auctionId) {
+        const auction = auctions.find(a => a.id === auctionId);
+        if (!auction) return;
+        
+        // Ordenar os lances do maior para o menor
+        const sortedBids = [...auction.bidHistory].sort((a, b) => b.amount - a.amount);
+        
+        // Encontrar o próximo lance válido (excluindo o vencedor atual e os já passados)
+        let nextWinner = null;
+        for (const bid of sortedBids) {
+            // Se o bidder não for o vencedor atual e não estiver na lista de passados
+            if (bid.id !== auction.winnerId && 
+                (!auction.passedBidders || !auction.passedBidders.includes(bid.id))) {
+                nextWinner = bid;
+                break;
+            }
+        }
+        
+        if (nextWinner) {
+            // Adicionar o vencedor atual à lista de passados
+            const passedBidders = [...(auction.passedBidders || []), auction.winnerId];
+            
+            // Atualizar o leilão com o novo vencedor
+            db.collection("auctions").doc(auctionId).update({
+                winnerId: nextWinner.id,
+                highestBidder: {
+                    id: nextWinner.id,
+                    name: nextWinner.name
+                },
+                code: null, // Resetar o código para que o novo vencedor possa gerar
+                passedBidders: passedBidders
+            })
+            .then(() => {
+                showToast('Leilão passado para o próximo colocado com sucesso!', 'success');
+            })
+            .catch(error => {
+                console.error("Erro ao passar leilão:", error);
+                showToast('Erro ao passar leilão para o próximo colocado', 'error');
+            });
+        } else {
+            showToast('Não há próximo colocado disponível', 'error');
+        }
+    }
+
+    // Função para marcar a compra como concluída
+    function markAsCompleted(auctionId) {
+        db.collection("auctions").doc(auctionId).update({
+            purchaseCompleted: true
+        })
+        .then(() => {
+            showToast('Compra marcada como concluída!', 'success');
+        })
+        .catch(error => {
+            console.error("Erro ao marcar compra como concluída:", error);
+            showToast('Erro ao atualizar o estado da compra', 'error');
+        });
+    }
+
+    // Função para reiniciar o leilão
+    function restartAuction(auctionId) {
+        const auction = auctions.find(a => a.id === auctionId);
+        if (!auction) return;
+
+        // Resetar o leilão para o estado inicial
+        db.collection("auctions").doc(auctionId).update({
+            winnerId: null,
+            code: null,
+            currentBid: auction.startBid,
+            highestBidder: null,
+            passedBidders: [],
+            purchaseCompleted: false,
+            startTime: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        .then(() => {
+            showToast('Leilão reiniciado com sucesso!', 'success');
+        })
+        .catch(error => {
+            console.error("Erro ao reiniciar leilão:", error);
+            showToast('Erro ao reiniciar o leilão', 'error');
+        });
+    }
+
     // Verificar se o leilão terminou
     function isAuctionEnded(auction) {
         const endTime = auction.startTime.toMillis() + auction.duration;
@@ -1810,6 +2300,13 @@
                 const countdownEl = document.getElementById(`countdown-${auction.id}`);
                 if (countdownEl) {
                     countdownEl.textContent = formatTime(timeRemaining);
+                    
+                    // Adicionar classe urgent se faltar menos de 10 minutos (600000 ms) e não tiver acabado
+                    if (timeRemaining > 0 && timeRemaining < 600000) {
+                        countdownEl.parentElement.classList.add('urgent');
+                    } else {
+                        countdownEl.parentElement.classList.remove('urgent');
+                    }
                     
                     // Atualizar estado do leilão
                     if (timeRemaining <= 0) {
@@ -1843,6 +2340,38 @@
     // Manipular lance
     function handleBid(e, auctionId) {
         e.preventDefault();
+        
+        // Prevenir múltiplos cliques
+        if (isProcessing) return;
+        isProcessing = true;
+        
+        // Desativar botão para evitar múltiplos cliques
+        const submitButton = e.target.querySelector('.btn-bid');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Processando...';
+        
+        // Determinar token do usuário
+        let bidderToken = userToken;
+        let bidderName = userName;
+        
+        // Administradores autenticados podem usar seu UID
+        if (isAdmin && !bidderToken) {
+            const user = auth.currentUser;
+            if (user) {
+                bidderToken = user.uid;
+                bidderName = "Administrador";
+            }
+        }
+
+        if (!bidderToken) {
+            showToast('Você precisa configurar um token para dar lances', 'error');
+            tokenSetupModal.style.display = 'flex';
+            isProcessing = false;
+            submitButton.disabled = false;
+            submitButton.textContent = 'Lance';
+            return;
+        }
+
         const form = e.target;
         const bidInput = form.querySelector('.bid-input');
         const bidValue = parseFloat(bidInput.value);
@@ -1850,30 +2379,45 @@
         const auction = auctions.find(a => a.id === auctionId);
         if (!auction) {
             showToast('Leilão não encontrado. Recarregue a página e tente novamente.', 'error');
+            isProcessing = false;
+            submitButton.disabled = false;
+            submitButton.textContent = 'Lance';
             return;
         }
         
         if (isNaN(bidValue)) {
             showToast('Valor inválido. Digite um número válido.', 'error');
+            isProcessing = false;
+            submitButton.disabled = false;
+            submitButton.textContent = 'Lance';
             return;
         }
         
         if (bidValue <= auction.currentBid) {
             showToast(`Lance deve ser maior que R$ ${auction.currentBid.toFixed(2)}`, 'error');
+            isProcessing = false;
+            submitButton.disabled = false;
+            submitButton.textContent = 'Lance';
             return;
         }
         
-        if (!userToken) {
-            showToast('Você precisa configurar um token para dar lances', 'error');
-            tokenSetupModal.style.display = 'flex';
+        // Calcular o lance máximo permitido com tolerância de 0.25
+        const maxAllowedBid = auction.currentBid + (auction.currentBid * 0.2) + 1;
+        const tolerance = 0.25; // Tolerância de 0.25 centavos
+        
+        if (bidValue > maxAllowedBid + tolerance) {
+            showToast(`O lance não pode ser maior que R$ ${(maxAllowedBid).toFixed(2)} (20% acima do atual + R$1,00)`, 'error');
+            isProcessing = false;
+            submitButton.disabled = false;
+            submitButton.textContent = 'Lance';
             return;
         }
         
         const auctionRef = db.collection("auctions").doc(auctionId);
         
         const newBid = {
-            id: userToken.toUpperCase(),
-            name: userName,
+            id: bidderToken.toUpperCase(),
+            name: bidderName,
             amount: bidValue,
             timestamp: Date.now()
         };
@@ -1881,18 +2425,24 @@
         auctionRef.update({
             currentBid: bidValue,
             highestBidder: {
-                id: userToken.toUpperCase(),
-                name: userName
+                id: bidderToken.toUpperCase(),
+                name: bidderName
             },
             bidHistory: firebase.firestore.FieldValue.arrayUnion(newBid)
         })
         .then(() => {
             showToast(`Lance de R$ ${bidValue.toFixed(2)} registrado!`, 'success');
             bidInput.value = '';
+            isProcessing = false;
+            submitButton.disabled = false;
+            submitButton.textContent = 'Lance';
         })
         .catch(error => {
             console.error("Erro ao dar lance:", error);
             showToast('Erro ao dar lance. Tente novamente.', 'error');
+            isProcessing = false;
+            submitButton.disabled = false;
+            submitButton.textContent = 'Lance';
         });
     }
 
@@ -1901,8 +2451,15 @@
         const auction = auctions.find(a => a.id === auctionId);
         if (!auction) return;
         
+        // Determinar token do usuário
+        let bidderToken = userToken;
+        if (isAdmin && !bidderToken) {
+            const user = auth.currentUser;
+            if (user) bidderToken = user.uid;
+        }
+        
         // Verificar se o usuário é o vencedor
-        if (!auction.highestBidder || auction.highestBidder.id !== userToken) {
+        if (!auction.highestBidder || auction.highestBidder.id !== bidderToken) {
             showToast('Apenas o vencedor pode gerar o código', 'error');
             return;
         }
@@ -1925,21 +2482,11 @@
         // Atualizar no Firestore
         db.collection("auctions").doc(auctionId).update({
             code: code,
-            winnerId: userToken.toUpperCase(),
+            winnerId: bidderToken.toUpperCase(),
             highestBidder: auction.highestBidder
         })
         .then(() => {
             showToast('Código gerado com sucesso!', 'success');
-            
-            // Atualiza o leilão localmente
-            const auctionIndex = auctions.findIndex(a => a.id === auctionId);
-            if (auctionIndex !== -1) {
-                auctions[auctionIndex].code = code;
-                auctions[auctionIndex].winnerId = userToken.toUpperCase();
-                
-                // Força a atualização do card
-                renderAuctions();
-            }
         })
         .catch(error => {
             console.error("Erro ao gerar código: ", error);
@@ -1987,25 +2534,8 @@
 
     // Verificar status de admin
     function checkAdminStatus(userId) {
-        return new Promise((resolve, reject) => {
-            db.collection("admins").doc(userId).get()
-                .then(doc => {
-                    if (doc.exists) {
-                        isAdmin = true;
-                        localStorage.setItem('isAdmin', 'true');
-                        adminInfo.style.display = 'block';
-                        resolve(true);
-                    } else {
-                        isAdmin = false;
-                        localStorage.removeItem('isAdmin');
-                        resolve(false);
-                    }
-                })
-                .catch(error => {
-                    console.error("Erro ao verificar status de admin:", error);
-                    reject(error);
-                });
-        });
+        return db.collection("admins").doc(userId).get()
+            .then(doc => doc.exists);
     }
 
     // Tornar administrador
@@ -2079,7 +2609,7 @@
             const minutes = Math.floor(auction.duration / (1000 * 60));
             document.getElementById('auction-duration').value = minutes || 60;
             
-            document.getElementById('auction-start-bid').value = auction.currentBid || '';
+            document.getElementById('auction-start-bid').value = auction.startBid || '';
             document.getElementById('auction-image').value = auction.image || '';
         }
     }
@@ -2119,6 +2649,7 @@
             description,
             category,
             duration: durationMs,
+            startBid: startBid,
             currentBid: startBid,
             highestBidder: null,
             ended: false,
@@ -2200,6 +2731,7 @@
                         adminInfo.style.display = 'block';
                         adminPanel.style.display = 'block';
                         showToast('Acesso administrativo concedido', 'success');
+                        loadAuctions(); // Carregar leilões após login
                     } else {
                         showToast('Login realizado, mas você não é administrador', 'info');
                     }
@@ -2287,7 +2819,7 @@
         purchaseTitle.textContent = auction.title;
         purchaseCode.textContent = auction.code;
         purchaseValue.textContent = `R$ ${auction.currentBid.toFixed(2)}`;
-        purchaseStatus.textContent = 'Aguardando confirmação';
+        purchaseStatus.textContent = 'Aguardando conclusão da compra';
         
         // Configurar link do WhatsApp corretamente
         const message = encodeURIComponent(
